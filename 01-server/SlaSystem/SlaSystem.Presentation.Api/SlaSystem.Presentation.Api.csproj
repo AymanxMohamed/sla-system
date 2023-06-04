@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SlaSystem.Infrastrucutre\SlaSystem.Infrastrucutre.csproj" />
+    <ProjectReference Include="..\SlaSystem.Infrastructure\SlaSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\SlaSystem.Application\SlaSystem.Application.csproj" />
     <ProjectReference Include="..\SlaSystem.Domain\SlaSystem.Domain.csproj" />
   </ItemGroup>

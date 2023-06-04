@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "d/ew+WQeVWyfRdTCDxTsMgsa/91n8P0AaIYXXQ0e+0qSYB9ugFK+vOAndo1m+QhU5NnTb41ZAffocW2UckoPdQ==",
+  "dgSpecHash": "nNxRl1exxSY9+7WfHEJy8s88oY6xPu08PoY2Fi0cfpOa+AMcKmTASTlL2I91RsnxUZyj5VEXGV1G51Hpdf6dgQ==",
   "success": true,
   "projectFilePath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Application\\SlaSystem.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ayman\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

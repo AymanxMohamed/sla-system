@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlaSystem.Application", "Sl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlaSystem.Domain", "SlaSystem.Domain\SlaSystem.Domain.csproj", "{EE410387-1BAA-48A3-BDE2-5BE2E41F1F3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlaSystem.Infrastrucutre", "SlaSystem.Infrastrucutre\SlaSystem.Infrastrucutre.csproj", "{794C01FA-39D0-4BE2-97B1-CEA22CD8C564}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlaSystem.Infrastructure", "SlaSystem.Infrastructure\SlaSystem.Infrastructure.csproj", "{794C01FA-39D0-4BE2-97B1-CEA22CD8C564}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlaSystem.Presentation.Api", "SlaSystem.Presentation.Api\SlaSystem.Presentation.Api.csproj", "{068CC2E3-0BBB-484C-AD10-30C2C7872242}"
 EndProject

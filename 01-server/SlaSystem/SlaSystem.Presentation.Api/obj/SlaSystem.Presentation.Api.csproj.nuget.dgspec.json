@@ -48,6 +48,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -126,14 +132,14 @@
         }
       }
     },
-    "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj": {
+    "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastructure\\SlaSystem.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj",
-        "projectName": "SlaSystem.Infrastrucutre",
-        "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj",
+        "projectUniqueName": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastructure\\SlaSystem.Infrastructure.csproj",
+        "projectName": "SlaSystem.Infrastructure",
+        "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastructure\\SlaSystem.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\ayman\\.nuget\\packages\\",
-        "outputPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\obj\\",
+        "outputPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -245,8 +251,8 @@
               "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj": {
                 "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj"
               },
-              "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj": {
-                "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj"
+              "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastructure\\SlaSystem.Infrastructure.csproj": {
+                "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastructure\\SlaSystem.Infrastructure.csproj"
               }
             }
           }
