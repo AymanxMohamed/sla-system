@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SlaSystem.Infrastrucutre\SlaSystem.Infrastrucutre.csproj" />
+    <ProjectReference Include="..\SlaSystem.Application\SlaSystem.Application.csproj" />
+    <ProjectReference Include="..\SlaSystem.Domain\SlaSystem.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
