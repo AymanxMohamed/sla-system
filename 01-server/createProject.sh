@@ -1,6 +1,3 @@
-# Proejct Setup Commands
-git init
-
 # Creating Folder Structure
 mkdir SlaSystem
 
