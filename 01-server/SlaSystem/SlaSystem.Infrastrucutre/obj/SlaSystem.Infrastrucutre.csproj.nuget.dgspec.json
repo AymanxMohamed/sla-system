@@ -4,14 +4,77 @@
     "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj": {}
   },
   "projects": {
-    "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj": {
+    "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Application\\SlaSystem.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj",
-        "projectName": "SlaSystem.Infrastrucutre",
-        "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj",
+        "projectUniqueName": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Application\\SlaSystem.Application.csproj",
+        "projectName": "SlaSystem.Application",
+        "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Application\\SlaSystem.Application.csproj",
         "packagesPath": "C:\\Users\\ayman\\.nuget\\packages\\",
-        "outputPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\obj\\",
+        "outputPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ayman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj": {
+                "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.311\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj",
+        "projectName": "SlaSystem.Domain",
+        "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\ayman\\.nuget\\packages\\",
+        "outputPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +107,90 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.311\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj",
+        "projectName": "SlaSystem.Infrastrucutre",
+        "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\SlaSystem.Infrastrucutre.csproj",
+        "packagesPath": "C:\\Users\\ayman\\.nuget\\packages\\",
+        "outputPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Infrastrucutre\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ayman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Application\\SlaSystem.Application.csproj": {
+                "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Application\\SlaSystem.Application.csproj"
+              },
+              "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj": {
+                "projectPath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Domain\\SlaSystem.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.117, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
