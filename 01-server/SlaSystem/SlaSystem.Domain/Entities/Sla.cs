@@ -7,5 +7,5 @@ public class Sla : Entity
 {
     public RequestType RequestType { get; set; } = RequestType.Invoice;
     public Severity Severity { get; set; } = Severity.Low;
-    public int DurationInHours { get; set; }
+    public double DurationInHours { get; set; }
 }

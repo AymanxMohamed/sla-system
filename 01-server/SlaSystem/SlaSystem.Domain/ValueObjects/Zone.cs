@@ -2,12 +2,12 @@
 
 namespace SlaSystem.Domain.ValueObjects;
 
-public class UserName : ValueObject
+public class Zone : ValueObject
 {
-    private UserName(string value) => Value = value;
+    private Zone(string value) => Value = value;
     private string Value { get;  }
 
-    public static UserName Create(string username) => new UserName(username);
+    public static Zone Create(string zone) => new Zone(zone);
 
     public override IEnumerable<object> GetAtomicValues()
     {
