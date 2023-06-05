@@ -37,10 +37,16 @@ public class UserController : ApiController
     public async Task<ActionResult<Result<User>>> CreateUser([FromBody] CreateUserRequest createUserRequest, 
         CancellationToken cancellationToken)
     {
+        var isParsed = Guid.TryParse(createUserRequest.QueueId, out var guid);
+        
+        if (!isParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Queue Id")));
+        
         var command = new CreateUserCommand(UserName.Create(createUserRequest.UserName), 
             Password.Create(createUserRequest.Password), 
             Zone.Create(createUserRequest.Zone), 
-            Guid.Parse(createUserRequest.QueueId), 
+            guid, 
             Role.User);
         var result = await Sender.Send(command, cancellationToken);
         

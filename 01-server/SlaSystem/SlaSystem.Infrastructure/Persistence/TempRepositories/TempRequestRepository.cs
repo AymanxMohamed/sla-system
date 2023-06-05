@@ -12,18 +12,18 @@ public class TempRequestRepository : IRequestRepository
 
     public async Task CloseRequestAsync(Guid requestId, CancellationToken cancellationToken)
     {
-        var request = Request.Requests.FirstOrDefault(r => r.Id == requestId)!;
-        request.Close();
+        var request = Request.Requests.FirstOrDefault(r => r.Id == requestId);
+        request?.Close();
     }
 
-    public async Task<Request> GetRequestByIdAsync(Guid requestId, CancellationToken cancellationToken)
+    public async Task<Request?> GetRequestByIdAsync(Guid requestId, CancellationToken cancellationToken)
     {
-        return Request.Requests.FirstOrDefault(x => x.Id == requestId)!;
+        return Request.Requests.FirstOrDefault(x => x.Id == requestId);
     }
 
     public async Task<List<Request>> GetRequestsByClientIdAsync(Guid clientId, CancellationToken cancellationToken)
     {
-        return Request.Requests.Where(x => x.Id == clientId).ToList();
+        return Request.Requests.Where(x => x.ClientId == clientId).ToList();
     }
 
     public async Task<List<Request>> GetRequestsByClientIdAndRequestTypeAsync(Guid clientId, RequestType requestType,

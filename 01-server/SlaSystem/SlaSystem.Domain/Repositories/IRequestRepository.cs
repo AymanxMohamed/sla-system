@@ -8,7 +8,7 @@ public interface IRequestRepository
 {
     Task AssignUserToRequestAsync(Guid ownerId, Guid requestId, CancellationToken cancellationToken);
     Task CloseRequestAsync(Guid requestId, CancellationToken cancellationToken);
-    Task<Request> GetRequestByIdAsync(Guid requestId, CancellationToken cancellationToken);
+    Task<Request?> GetRequestByIdAsync(Guid requestId, CancellationToken cancellationToken);
     Task<List<Request>> GetRequestsByClientIdAsync(Guid clientId, CancellationToken cancellationToken);
     Task<List<Request>> GetRequestsByClientIdAndRequestTypeAsync(Guid clientId, RequestType requestType, CancellationToken cancellationToken);
     Task<List<Request>> GetRequestsByUserIdAsync(Guid userId, CancellationToken cancellationToken);

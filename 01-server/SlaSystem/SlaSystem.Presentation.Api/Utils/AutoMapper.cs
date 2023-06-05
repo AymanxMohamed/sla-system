@@ -43,7 +43,7 @@ public static class AutoMapper
 
     public static RequestDto MapRequest(Request request)
     {
-        var ownerDto = request.Owner != null ? MapUser(request.Owner) : null;
+        var ownerDto = request.Owner is not null ? MapUser(request.Owner) : null;
         var clientDto = MapUser(request.Client);
         var slaDto = MapSla(request.Sla);
 

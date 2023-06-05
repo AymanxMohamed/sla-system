@@ -24,7 +24,14 @@ public class RequestController : ApiController
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<Result<List<Request>>>> GetClientRequests(string clientId, CancellationToken cancellationToken)
     {
-        var query = new GetClientRequestsQuery(Guid.Parse(clientId)); 
+        
+        var isParsed = Guid.TryParse(clientId, out var guid);
+        
+        if (!isParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Client Id")));
+        
+        var query = new GetClientRequestsQuery(guid); 
         
         var result = await Sender.Send(query, cancellationToken);
         
@@ -41,7 +48,13 @@ public class RequestController : ApiController
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<Result<List<Request>>>> GetUserRequests(string userId, CancellationToken cancellationToken)
     {
-        var query = new GetClientRequestsQuery(Guid.Parse(userId)); 
+        var isParsed = Guid.TryParse(userId, out var guid);
+        
+        if (!isParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Owner Id")));
+        
+        var query = new GetClientRequestsQuery(guid); 
         
         var result = await Sender.Send(query, cancellationToken);
 
@@ -58,9 +71,19 @@ public class RequestController : ApiController
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<Result<Request>>> GetRequest(string id, CancellationToken cancellationToken)
     {
-        var query = new GetRequestByIdQuery(Guid.Parse(id)); 
+        var isParsed = Guid.TryParse(id, out var guid);
+        
+        if (!isParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Request Id")));
+        
+        var query = new GetRequestByIdQuery(guid); 
         
         var result = await Sender.Send(query, cancellationToken);
+
+        if (result.Value is null)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Request Id")));
         
         if (result.IsFailure)
             return BadRequest(result.Error);
@@ -76,8 +99,15 @@ public class RequestController : ApiController
     public async Task<ActionResult<Result<Request>>> CreateRequest([FromBody] CreateRequestPayload createRequestPayload, 
         CancellationToken cancellationToken)
     {
+        
+        var isParsed = Guid.TryParse(createRequestPayload.ClientId, out var guid);
+        
+        if (!isParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Client Id")));
+        
         var command = new CreateRequestCommand(createRequestPayload.RequestType,
-            Description.Create(createRequestPayload.Description), Guid.Parse(createRequestPayload.ClientId));
+            Description.Create(createRequestPayload.Description), guid);
         
         var result = await Sender.Send(command, cancellationToken);
 
@@ -96,8 +126,20 @@ public class RequestController : ApiController
     public async Task<ActionResult<Result>> AssignRequest([FromBody] AssignRequestPayload assignRequestPayload, 
         CancellationToken cancellationToken)
     {
-        var command = new AssignUserToRequestCommand(Guid.Parse(assignRequestPayload.OwnerId), 
-            Guid.Parse(assignRequestPayload.RequestId));
+        var isOwnerParsed = Guid.TryParse(assignRequestPayload.OwnerId, out var ownerGuid);
+        
+        if (!isOwnerParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Owner Id")));
+        
+        var isRequestParsed = Guid.TryParse(assignRequestPayload.OwnerId, out var requestGuid);
+        
+        if (!isRequestParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Request Id")));
+        
+        var command = new AssignUserToRequestCommand(ownerGuid, 
+            requestGuid);
         
         var result = await Sender.Send(command, cancellationToken);
         
@@ -109,7 +151,13 @@ public class RequestController : ApiController
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<Result>> CloseRequest(string requestId, CancellationToken cancellationToken)
     {
-        var command = new CloseRequestCommand(Guid.Parse(requestId));
+        var isParsed = Guid.TryParse(requestId, out var guid);
+        
+        if (!isParsed)
+            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Request Id")));
+        
+        var command = new CloseRequestCommand(guid);
         
         var result = await Sender.Send(command, cancellationToken);
         
