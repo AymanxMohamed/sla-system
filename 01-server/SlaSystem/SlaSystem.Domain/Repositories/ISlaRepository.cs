@@ -5,8 +5,8 @@ namespace SlaSystem.Domain.Repositories;
 
 public interface ISlaRepository
 {
-    Task<List<Sla>> GetSlasAsync();
-    Task<List<Sla>> GetSlasByRequestTypeAsync(RequestType requestType);
-    Task<Sla> GetSlaByIdAsync();
-    Task<Sla> CreateSlaAsync();
+    Task<List<Sla>> GetSlasAsync(CancellationToken cancellationToken);
+    Task<Sla> GetSlasByRequestTypeAsync(RequestType requestType, CancellationToken cancellationToken);
+    Task<Sla> GetSlaByIdAsync(CancellationToken cancellationToken);
+    Task<Sla> CreateSlaAsync(CancellationToken cancellationToken);
 }

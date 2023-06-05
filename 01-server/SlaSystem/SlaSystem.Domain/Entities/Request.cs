@@ -12,19 +12,20 @@ public class Request : Entity
         RequestType requestType,
         Description description,
         Sla sla,
-        User client) : base(id)
+        Guid clientId) : base(id)
     {
         RequestType = requestType;
         Description = description;
         Sla = sla;
-        Client = client;
+        ClientId = clientId;
     }
 
     public RequestType RequestType { get; }
     public Description Description { get; private set; }
     public Guid OwnerId { get; private set; }
     public User? Owner { get; private set; }
-    public User Client { get; }
+    public User? Client { get; }
+    public Guid ClientId { get;  }
     public Sla Sla { get; }
 
     public DateTime CreatedAt { get; } = DateTime.Now;
@@ -55,9 +56,9 @@ public class Request : Entity
         RequestType requestType,
         Description description,
         Sla sla,
-        User client)
+        Guid clientId)
     {
-        var request = new Request(new Guid(), requestType, description, sla, client);
+        var request = new Request(new Guid(), requestType, description, sla, clientId);
         request.SetSlaExpiredOn();
         return request;
     }
