@@ -5,13 +5,11 @@ namespace SlaSystem.Domain.Entities;
 
 public class Sla : Entity
 {
-
     private Sla(Guid id,RequestType requestType, Severity severity, double durationInHours) : base(id)
     {
         RequestType = requestType;
         Severity = severity;
         DurationInHours = durationInHours;
-
     }
     public RequestType RequestType { get; private set; }
     public Severity Severity { get; private set; }

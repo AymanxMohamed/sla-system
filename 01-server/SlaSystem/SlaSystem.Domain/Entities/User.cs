@@ -6,29 +6,32 @@ namespace SlaSystem.Domain.Entities;
 
 public class User : Entity
 {
-    private User(Guid id, UserName username, Password password, Zone zone, Queue? queue, Role role) 
+    private User(Guid id, string userName, string password, string zone, Guid queueId, Role role) 
         : base(id)
     {
-        UserName = username;
+        UserName = userName;
         Password = password;
         Role = role;
         Zone = zone;
-        Queue = queue;
+        QueueId = queueId;
     }
     
-    public UserName UserName { get; set; }
-    public Password Password { get; set; }
+    public string UserName { get; set; }
+    public string Password { get; set; }
     public Role Role { get; private set; }
-    public Zone Zone { get; set; }
+    public string Zone { get; set; }
     public Queue? Queue { get; private set; }
     public Guid QueueId { get; set; }
 
     public List<Request> MyCreatedRequests { get; } = new();
     public List<Request> OwnedRequests { get; } = new();
 
-    public static User Create(UserName username, Password password, Zone zone, Queue? queue, Role role = Role.User)
+    public static User Create(UserName username, Password password, Zone zone, Queue queue, Role role = Role.User)
     {
-        var user = new User(Guid.NewGuid(), username, password, zone, queue, role);
+        var user = new User(Guid.NewGuid(), username.Value, password.Value, zone.Value, queue.Id, role)
+        {
+            Queue = queue
+        };
         queue?.AddUser(user);
         return user;
     }

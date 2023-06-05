@@ -1,4 +1,7 @@
-﻿namespace SlaSystem.Presentation.Api.Extensions;
+﻿using Microsoft.EntityFrameworkCore;
+using SlaSystem.Infrastructure.Persistence;
+
+namespace SlaSystem.Presentation.Api.Extensions;
 
 public static class ApplicationServicesExtensions
 {
@@ -7,6 +10,7 @@ public static class ApplicationServicesExtensions
     {
         services.AddControllers();
         services.AddEndpointsApiExplorer();
+       
         services
             .AddSwaggerGen()
             .AddApplication()
@@ -14,7 +18,7 @@ public static class ApplicationServicesExtensions
             .AddPresentation()
             .AddCors(opt =>
             {
-                opt.AddPolicy("CorsPolicy", policy => 
+                opt.AddPolicy("CorsPolicy", policy =>
                 {
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                 });

@@ -6,13 +6,13 @@ namespace SlaSystem.Domain.Entities;
 
 public class Queue : Entity
 {
-    private Queue(Guid id,QueueName queueName, RequestType requestType) : base(id)
+    private Queue(Guid id, string queueName, RequestType requestType) : base(id)
     {
         QueueName = queueName;
         RequestType = requestType;
     }
 
-    public QueueName QueueName { get; }
+    public string QueueName { get; set; }
     public RequestType RequestType { get; }
     public List<User> Users { get; } = new();
 
@@ -22,7 +22,7 @@ public class Queue : Entity
         RequestType requestType,
         QueueName queueName)
     {
-        return new Queue(Guid.NewGuid(), queueName, requestType);
+        return new Queue(Guid.NewGuid(), queueName.Value, requestType);
     }
     internal void RemoveUser(User user) => Users.Remove(user);
 }

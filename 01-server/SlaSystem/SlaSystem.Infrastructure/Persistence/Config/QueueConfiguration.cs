@@ -8,7 +8,7 @@ public class QueueConfiguration : IEntityTypeConfiguration<Queue>
     public void Configure(EntityTypeBuilder<Queue> builder)
     {
         builder.Property(q => q.Id).IsRequired();
-        builder.Property(q => q.QueueName).IsRequired();
+        builder.Property(q => q.QueueName);
         builder.Property(q => q.RequestType).IsRequired().HasConversion<string>();
         builder.HasMany(q => q.Users)
             .WithOne(u => u.Queue)
