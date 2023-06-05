@@ -1,9 +1,4 @@
-﻿using MediatR;
-using SlaSystem.Application.Abstractions.Messaging;
-using SlaSystem.Domain.Repositories;
-using SlaSystem.Domain.Shared;
-
-namespace SlaSystem.Application.Requests.Commands;
+﻿namespace SlaSystem.Application.Requests.Commands;
 
 public class CloseRequestCommandHandler : ICommandHandler<CloseRequestCommand>
 {

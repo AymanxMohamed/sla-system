@@ -1,7 +1,4 @@
-﻿using MediatR;
-using SlaSystem.Domain.Shared;
-
-namespace SlaSystem.Application.Abstractions.Messaging;
+﻿namespace SlaSystem.Application.Abstractions.Messaging;
 
 public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, Result>
     where TCommand : ICommand

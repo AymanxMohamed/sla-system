@@ -1,9 +1,4 @@
-﻿using SlaSystem.Application.Abstractions.Messaging;
-using SlaSystem.Domain.Entities;
-using SlaSystem.Domain.Repositories;
-using SlaSystem.Domain.Shared;
-
-namespace SlaSystem.Application.Requests.Commands;
+﻿namespace SlaSystem.Application.Requests.Commands;
 
 public class CreateRequestCommandHandler : ICommandHandler<CreateRequestCommand, Request>
 {
