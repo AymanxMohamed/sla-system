@@ -8,13 +8,13 @@ public class RequestConfiguration : IEntityTypeConfiguration<Request>
     public void Configure(EntityTypeBuilder<Request> builder)
     {
         builder.Property(r => r.Id).IsRequired();
-        builder.Property(r => r.RequestType).IsRequired().HasConversion<string>();;
-        builder.Property(r => r.Description).IsRequired();
+        builder.Property(r => r.RequestType).IsRequired().HasConversion<string>().IsUnicode(false);
+        builder.Property(r => r.Description).IsRequired().IsUnicode(false);
         builder.Property(r => r.ClientId).IsRequired();
         builder.Property(r => r.SlaId).IsRequired();
         builder.Property(r => r.CreatedAt).IsRequired();
-        builder.Property(r => r.RequestStatus).HasConversion<string>();;
-        builder.Property(r => r.SlaStatus) .HasConversion<string>();;
+        builder.Property(r => r.RequestStatus).HasConversion<string>().IsUnicode(false);
+        builder.Property(r => r.SlaStatus) .HasConversion<string>().IsUnicode(false);
         builder.Property(r => r.ClosedAt);
 
         builder.HasOne(r => r.Sla)

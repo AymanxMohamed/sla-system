@@ -1,25 +1,45 @@
-﻿namespace SlaSystem.Infrastructure.Persistence.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SlaSystem.Infrastructure.Persistence.Repositories;
 
 public class RequestRepository : IRequestRepository
 {
-    public Task AssignUserToRequestAsync(Guid ownerId, Guid requestId, CancellationToken cancellationToken)
+    private ApplicationDbContext _context;
+
+    public RequestRepository(ApplicationDbContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task CloseRequestAsync(Guid requestId, CancellationToken cancellationToken)
+    public async Task AssignUserToRequestAsync(Guid ownerId, Guid requestId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var request = await _context.Requests.FirstOrDefaultAsync(x => x.Id == requestId,
+            cancellationToken: cancellationToken);
+        if (request == null) return;
+        request.Assign(ownerId);
+        _context.Requests.Update(request);
     }
 
-    public Task<Request> GetRequestByIdAsync(Guid requestId, CancellationToken cancellationToken)
+    public async Task CloseRequestAsync(Guid requestId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var request = await _context.Requests.FirstOrDefaultAsync(x => x.Id == requestId,
+            cancellationToken: cancellationToken);
+        if (request == null) return;
+        request.Close();
+        _context.Requests.Update(request);
     }
 
-    public Task<List<Request>> GetRequestsByClientIdAsync(Guid clientId, CancellationToken cancellationToken)
+    public async Task<Request> GetRequestByIdAsync(Guid requestId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        
+        return (await _context.Requests.FirstOrDefaultAsync(x => x.Id == requestId,
+            cancellationToken: cancellationToken))!;
+    }
+
+    public async Task<List<Request>> GetRequestsByClientIdAsync(Guid clientId, CancellationToken cancellationToken)
+    {
+        return await _context.Requests.Where(x => x.ClientId == clientId).
+            ToListAsync(cancellationToken: cancellationToken);
     }
 
     public Task<List<Request>> GetRequestsByClientIdAndRequestTypeAsync(Guid clientId, RequestType requestType,
@@ -28,9 +48,10 @@ public class RequestRepository : IRequestRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<Request>> GetRequestsByUserIdAsync(Guid userId, CancellationToken cancellationToken)
+    public async Task<List<Request>> GetRequestsByUserIdAsync(Guid userId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Requests.Where(x => x.OwnerId == userId).
+            ToListAsync(cancellationToken: cancellationToken);
     }
 
     public Task<List<Request>> GetRequestsByUserIdAndRequestTypeAsync(Guid userId, RequestType requestType, CancellationToken cancellationToken)
@@ -43,8 +64,9 @@ public class RequestRepository : IRequestRepository
         throw new NotImplementedException();
     }
 
-    public Task<Request> CreateRequest(Request request, CancellationToken cancellationToken)
+    public async Task<Request> CreateRequest(Request request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var created = await _context.AddAsync(request, cancellationToken);
+        return created.Entity;
     }
 }

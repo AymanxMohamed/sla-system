@@ -11,8 +11,8 @@ using SlaSystem.Infrastructure.Persistence;
 namespace SlaSystem.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230605161842_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230605170140_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,10 +27,12 @@ namespace SlaSystem.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("QueueName")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RequestType")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -55,6 +57,7 @@ namespace SlaSystem.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("OwnerId")
@@ -62,10 +65,12 @@ namespace SlaSystem.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("RequestStatus")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RequestType")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SlaExpiredOn")
@@ -78,6 +83,7 @@ namespace SlaSystem.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("SlaStatus")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -103,6 +109,7 @@ namespace SlaSystem.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("RequestType")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Severity")
@@ -121,6 +128,7 @@ namespace SlaSystem.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("QueueId")
@@ -132,10 +140,12 @@ namespace SlaSystem.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Zone")
                         .IsRequired()
+                        .IsUnicode(false)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

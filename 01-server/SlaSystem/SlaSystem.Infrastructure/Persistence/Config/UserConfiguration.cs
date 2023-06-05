@@ -8,10 +8,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.Property(u => u.Id).IsRequired();
-        builder.Property(u => u.UserName).IsRequired();
-        builder.Property(u => u.Password).IsRequired();
+        builder.Property(u => u.UserName).IsRequired().IsUnicode(false);
+        builder.Property(u => u.Password).IsRequired().IsUnicode(false);
         builder.Property(u => u.Role).IsRequired().HasConversion<string>();
-        builder.Property(u => u.Zone).IsRequired();
+        builder.Property(u => u.Zone).IsRequired().IsUnicode(false);
 
         builder.HasOne(u => u.Queue)
             .WithMany(q => q.Users)

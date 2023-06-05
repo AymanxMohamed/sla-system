@@ -1,10 +1,18 @@
-﻿namespace SlaSystem.Infrastructure.Persistence.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SlaSystem.Infrastructure.Persistence.Repositories;
 
 public class QueueRepository : IQueueRepository
 {
-    public Task<Queue> CreateQueueAsync(Queue queue, CancellationToken cancellationToken)
+    private ApplicationDbContext _context;
+
+    public QueueRepository(ApplicationDbContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+    public async Task<Queue> CreateQueueAsync(Queue queue, CancellationToken cancellationToken)
+    {
+        return (await _context.Queues.AddAsync(queue, cancellationToken)).Entity;
     }
 
     public Task<List<Queue>> GetQueuesForRequestTypeAsync(RequestType requestType, CancellationToken cancellationToken)
@@ -12,9 +20,9 @@ public class QueueRepository : IQueueRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<Queue>> GetQueuesAsync(CancellationToken cancellationToken)
+    public async Task<List<Queue>> GetQueuesAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Queues.ToListAsync(cancellationToken: cancellationToken);
     }
 
     public Task<Queue> GetQueueByIdAsync(Guid? queueId, CancellationToken cancellationToken)
