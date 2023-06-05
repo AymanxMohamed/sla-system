@@ -13,9 +13,9 @@ public class UserController : ApiController
     }
     
     [HttpGet("GetUsers/{role}", Name = "GetUsers")]
-    [ProducesResponseType(typeof(Result<User>), (int)HttpStatusCode.Created)]
+    [ProducesResponseType(typeof(Result<List<User>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<ActionResult<Result<User>>> GetUsers(Role role, CancellationToken cancellationToken)
+    public async Task<ActionResult<Result<List<User>>>> GetUsers(Role role, CancellationToken cancellationToken)
     {
         var query = new GetUsersByRoleQuery(role); 
         
@@ -36,7 +36,7 @@ public class UserController : ApiController
             Guid.Parse(createUserRequest.QueueId), 
             Role.User);
         var result = await Sender.Send(command, cancellationToken);
-        return result.IsSuccess ? Created("/auth/login", result) : BadRequest(result.Error);
+        return result.IsSuccess ? Created("/admin/users", result) : BadRequest(result.Error);
     }
     
     [HttpPost("CreateAdmin", Name = "CreateAdmin")]
@@ -51,6 +51,6 @@ public class UserController : ApiController
         
         var result = await Sender.Send(command, cancellationToken);
 
-        return result.IsSuccess ? Created("/auth/login", result): BadRequest(result.Error);
+        return result.IsSuccess ? Created("/admin/admins", result): BadRequest(result.Error);
     }
 }
