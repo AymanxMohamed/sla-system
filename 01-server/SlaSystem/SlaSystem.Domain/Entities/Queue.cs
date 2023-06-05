@@ -8,7 +8,7 @@ public class Queue : Entity
 {
     private readonly List<User> _users = new();
 
-    private Queue(QueueName queueName, RequestType requestType)
+    private Queue(Guid id,QueueName queueName, RequestType requestType) : base(id)
     {
         QueueName = queueName;
         RequestType = requestType;
@@ -23,7 +23,7 @@ public class Queue : Entity
         RequestType requestType,
         QueueName queueName)
     {
-        return new Queue(queueName, requestType);
+        return new Queue(new Guid(), queueName, requestType);
     }
     internal void RemoveUser(User user) => _users.Remove(user);
 }
