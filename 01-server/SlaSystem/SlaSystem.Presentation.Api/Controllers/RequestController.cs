@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SlaSystem.Application.Requests.Commands;
 using SlaSystem.Application.Requests.Queries;
 using SlaSystem.Application.Slas.Commands;
+using SlaSystem.Domain.Errors;
 using SlaSystem.Presentation.Api.Contracts.Requests;
 using SlaSystem.Presentation.Api.Utils;
 
@@ -28,8 +29,11 @@ public class RequestController : ApiController
         var isParsed = Guid.TryParse(clientId, out var guid);
         
         if (!isParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Client Id")));
+        {
+            var failure = Result.Failure<Request>(new Error("Request.InvalidId",
+                "Invalid Client Id"));
+            return BadRequest(failure.Error);
+        }
         
         var query = new GetClientRequestsQuery(guid); 
         
@@ -51,8 +55,11 @@ public class RequestController : ApiController
         var isParsed = Guid.TryParse(userId, out var guid);
         
         if (!isParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Owner Id")));
+        {
+            var failure = Result.Failure<Request>(new Error("Request.InvalidId",
+                "Invalid Owner Id"));
+            return BadRequest(failure.Error);
+        }
         
         var query = new GetClientRequestsQuery(guid); 
         
@@ -74,16 +81,20 @@ public class RequestController : ApiController
         var isParsed = Guid.TryParse(id, out var guid);
         
         if (!isParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Request Id")));
-        
+        {
+            var failure = Result.Failure<Request>(new Error("Request.InvalidId",
+                "Invalid Request Id"));
+            return BadRequest(failure.Error);
+        }
         var query = new GetRequestByIdQuery(guid); 
         
         var result = await Sender.Send(query, cancellationToken);
 
         if (result.Value is null)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Request Id")));
+           {   
+                result = Result.Failure<Request>(DomainErrors.Request.InvalidRequestId);
+                return BadRequest(result.Error);
+           }
         
         if (result.IsFailure)
             return BadRequest(result.Error);
@@ -101,10 +112,13 @@ public class RequestController : ApiController
     {
         
         var isParsed = Guid.TryParse(createRequestPayload.ClientId, out var guid);
-        
+
         if (!isParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Client Id")));
+        {
+            var failure = Result.Failure<Request>(new Error("Request.InvalidId",
+                "Invalid Client Id"));
+            return BadRequest(failure.Error);
+        }
         
         var command = new CreateRequestCommand(createRequestPayload.RequestType,
             Description.Create(createRequestPayload.Description), guid);
@@ -127,16 +141,22 @@ public class RequestController : ApiController
         CancellationToken cancellationToken)
     {
         var isOwnerParsed = Guid.TryParse(assignRequestPayload.OwnerId, out var ownerGuid);
-        
+
         if (!isOwnerParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Owner Id")));
+        {
+            var failure = Result.Failure<Request>(new Error("Request.InvalidId",
+                "Invalid Owner Id"));
+            return BadRequest(failure.Error);
+        }
         
         var isRequestParsed = Guid.TryParse(assignRequestPayload.OwnerId, out var requestGuid);
         
         if (!isRequestParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Request Id")));
+        {
+            var failure = Result.Failure<Request>(new Error("Request.InvalidId",
+                "Invalid Request Id"));
+            return BadRequest(failure.Error);
+        }
         
         var command = new AssignUserToRequestCommand(ownerGuid, 
             requestGuid);
@@ -154,8 +174,11 @@ public class RequestController : ApiController
         var isParsed = Guid.TryParse(requestId, out var guid);
         
         if (!isParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Request Id")));
+        {
+            var failure =Result.Failure<Request>(new Error("Request.InvalidId", 
+                "Invalid Request Id"));
+            return BadRequest(failure.Error);
+        }
         
         var command = new CloseRequestCommand(guid);
         

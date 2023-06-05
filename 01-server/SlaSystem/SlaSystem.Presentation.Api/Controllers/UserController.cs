@@ -40,8 +40,11 @@ public class UserController : ApiController
         var isParsed = Guid.TryParse(createUserRequest.QueueId, out var guid);
         
         if (!isParsed)
-            return BadRequest(Result.Failure<Request>(new Error("Request.InvalidId", 
-                "Invalid Queue Id")));
+        {
+            var failure = Result.Failure<Request>(new Error("User.InvalidId",
+                "Invalid Queue Id"));
+            return BadRequest(failure.Error);
+        }
         
         var command = new CreateUserCommand(UserName.Create(createUserRequest.UserName), 
             Password.Create(createUserRequest.Password), 

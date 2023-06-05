@@ -10,6 +10,9 @@ public static class DomainErrors
             "Can't Close this request because the sla has been expired");
         public static readonly Error InvalidClient = new("Request.InvalidClient", 
             "Their is no client with this Id");
+
+        public static readonly Error InvalidRequestId = new("Request.InvalidId",
+            "Invalid Request Id");
     }
 
     public static class User
