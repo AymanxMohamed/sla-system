@@ -4,7 +4,7 @@ namespace SlaSystem.Infrastructure.Persistence.Repositories;
 
 public class RequestRepository : IRequestRepository
 {
-    private ApplicationDbContext _context;
+    private readonly ApplicationDbContext _context;
 
     public RequestRepository(ApplicationDbContext context)
     {
@@ -42,10 +42,11 @@ public class RequestRepository : IRequestRepository
             ToListAsync(cancellationToken: cancellationToken);
     }
 
-    public Task<List<Request>> GetRequestsByClientIdAndRequestTypeAsync(Guid clientId, RequestType requestType,
+    public async Task<List<Request>> GetRequestsByClientIdAndRequestTypeAsync(Guid clientId, RequestType requestType,
         CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Requests.Where(x => x.ClientId == clientId && x.RequestType == requestType).
+            ToListAsync(cancellationToken: cancellationToken);
     }
 
     public async Task<List<Request>> GetRequestsByUserIdAsync(Guid userId, CancellationToken cancellationToken)
@@ -54,14 +55,17 @@ public class RequestRepository : IRequestRepository
             ToListAsync(cancellationToken: cancellationToken);
     }
 
-    public Task<List<Request>> GetRequestsByUserIdAndRequestTypeAsync(Guid userId, RequestType requestType, CancellationToken cancellationToken)
+    public async Task<List<Request>> GetRequestsByUserIdAndRequestTypeAsync(Guid userId, RequestType requestType, 
+        CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Requests.Where(x => x.OwnerId == userId && x.RequestType == requestType).
+            ToListAsync(cancellationToken: cancellationToken);
     }
 
-    public Task<List<Request>> GetRequestsByRequestTypeAsync(RequestType requestType, CancellationToken cancellationToken)
+    public async Task<List<Request>> GetRequestsByRequestTypeAsync(RequestType requestType, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Requests.Where(x => x.RequestType == requestType).
+            ToListAsync(cancellationToken: cancellationToken);
     }
 
     public async Task<Request> CreateRequest(Request request, CancellationToken cancellationToken)

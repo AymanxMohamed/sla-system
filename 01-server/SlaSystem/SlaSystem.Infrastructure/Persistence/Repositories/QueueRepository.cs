@@ -15,9 +15,10 @@ public class QueueRepository : IQueueRepository
         return (await _context.Queues.AddAsync(queue, cancellationToken)).Entity;
     }
 
-    public Task<List<Queue>> GetQueuesForRequestTypeAsync(RequestType requestType, CancellationToken cancellationToken)
+    public async Task<List<Queue>> GetQueuesForRequestTypeAsync(RequestType requestType, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Queues.Where(x =>x.RequestType == requestType).
+            ToListAsync(cancellationToken: cancellationToken);
     }
 
     public async Task<List<Queue>> GetQueuesAsync(CancellationToken cancellationToken)
@@ -25,8 +26,9 @@ public class QueueRepository : IQueueRepository
         return await _context.Queues.ToListAsync(cancellationToken: cancellationToken);
     }
 
-    public Task<Queue> GetQueueByIdAsync(Guid? queueId, CancellationToken cancellationToken)
+    public async Task<Queue> GetQueueByIdAsync(Guid? queueId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return (await _context.Queues.FirstOrDefaultAsync(x => x.Id == queueId,
+            cancellationToken: cancellationToken))!;
     }
 }
