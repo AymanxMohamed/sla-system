@@ -10,11 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Authentication\Commands" />
-    <Folder Include="Queues\Commands" />
+    <Folder Include="Authentication\Queries" />
     <Folder Include="Queues\Queries" />
-    <Folder Include="Sla\Commands" />
-    <Folder Include="Sla\Queries" />
+    <Folder Include="Slas\Queries" />
   </ItemGroup>
 
   <PropertyGroup>

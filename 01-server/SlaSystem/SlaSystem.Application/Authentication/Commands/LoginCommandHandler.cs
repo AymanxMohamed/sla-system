@@ -1,6 +1,5 @@
-﻿using SlaSystem.Domain.Errors;
-
-namespace SlaSystem.Application.Authentication.Queries;
+﻿
+namespace SlaSystem.Application.Authentication.Commands;
 
 public class LoginCommandHandler : ICommandHandler<LoginCommand, User>
 {
