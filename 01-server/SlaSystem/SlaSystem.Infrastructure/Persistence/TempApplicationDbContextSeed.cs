@@ -1,40 +1,62 @@
 ﻿using System.Reflection;
 using System.Text.Json;
+using SlaSystem.Domain.ValueObjects;
 
 namespace SlaSystem.Infrastructure.Persistence;
 
 public static class TempApplicationDbContextSeed
 {
-    public static async Task SeedAsync()
+    public static void Seed()
     {
-        var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        if (!Queue.Queues.Any())
+        {
+            Queue.Queues.AddRange(new []
+            {
+                Queue.Create(RequestType.Invoice, QueueName.Create("Invoice Request Type")),
+                Queue.Create(RequestType.Payment, QueueName.Create("Payment Request Type")),
+            });
+        }
+        
+        if (!Sla.Slas.Any())
+        {
+            Sla.Slas.AddRange(new []
+            {
+                Sla.Create(RequestType.Invoice, Severity.High, 2),
+                Sla.Create(RequestType.Payment, Severity.Medium, 4)
+            });
+        }
 
         if (!User.Users.Any())
         {
-            var usersData = File.ReadAllText(path + @"/Persistence/Data/users.json");
-            var users = JsonSerializer.Deserialize<List<User>>(usersData);
-            if (users != null) User.Users.AddRange(users);
+            User.Users.AddRange(new []
+            {
+                CreateUser("egypt_admin", "egypt_admin", "EGP",null , Role.Admin),
+                CreateUser("uae_admin", "uae_admin", "UAE", null, Role.Admin),
+                CreateUser("egypt_user", "egypt_user", "EGP", Queue.Queues[0], Role.User),
+                CreateUser("uae_user", "uae_user", "UAE", Queue.Queues[1], Role.User),
+                CreateUser("egypt_client", "egypt_client", "EGP", null, Role.User),
+                CreateUser("uae_client", "uae_client", "EGP", null, Role.User),
+            });
         }
 
         if (!Request.Requests.Any())
         {
-            var requestsData = await File.ReadAllTextAsync(path + @"/Persistence/Data/requests.json");
-            var requests = JsonSerializer.Deserialize<List<Request>>(requestsData);
-            if (requests != null) Request.Requests.AddRange(requests);
+            Request.Requests.AddRange(new []
+            {
+                Request.Create(RequestType.Invoice, Description.Create("Invoice Request Type"),Sla.Slas[0], 
+                    User.Users[4].Id),
+                Request.Create(RequestType.Payment, Description.Create("Payment Request Type"),Sla.Slas[1], 
+                    User.Users[5].Id),
+            });
         }
 
-        if (!Sla.Slas.Any())
-        {
-            var slasData = await File.ReadAllTextAsync(path + @"/Persistence/Data/slas.json");
-            var slas = JsonSerializer.Deserialize<List<Sla>>(slasData);
-            if (slas != null) Sla.Slas.AddRange(slas);
-        }
 
-        if (!Queue.Queues.Any())
-        {
-            var queuesData = await File.ReadAllTextAsync(path + @"/Persistence/Data/queues.json");
-            var queues = JsonSerializer.Deserialize<List<Queue>>(queuesData);
-            if (queues != null) Queue.Queues.AddRange(queues);
-        }
+        
     }
+
+    private static User CreateUser(string userName, string password, string zone, Queue? queue, Role role)
+    { 
+        return User.Create(UserName.Create(userName), Password.Create(password), Zone.Create(zone), queue, role);
+    }
+
 }

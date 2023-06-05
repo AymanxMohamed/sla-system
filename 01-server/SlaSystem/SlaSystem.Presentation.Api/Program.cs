@@ -25,9 +25,9 @@ var app = builder.Build();
     app.MapControllers();
 }
 
-await TempApplicationDbContextSeed.SeedAsync();
+TempApplicationDbContextSeed.Seed();
 
-#region Database Seed Disabled
+// #region Database Seed Disabled
 // using var scope = app.Services.CreateScope();
 // var services = scope.ServiceProvider;
 // var context = services.GetRequiredService<ApplicationDbContext>();
@@ -41,7 +41,7 @@ await TempApplicationDbContextSeed.SeedAsync();
 // {
 //     logger.LogError(ex, "An error occured during migration");
 // }
-
-#endregion
+//
+// #endregion
 
 app.Run();
