@@ -9,9 +9,6 @@ public class User : Entity
 {
     public static readonly List<User> Users = new();
     
-    [JsonConstructorAttribute]
-    private User()
-    {}
     private User(Guid id, string userName, string password, string zone, Guid? queueId, Role role) 
         : base(id)
     {
@@ -28,9 +25,9 @@ public class User : Entity
     public string Zone { get; set; }
     public Queue? Queue { get; private set; }
     public Guid? QueueId { get; set; }
-
-    public List<Request> MyCreatedRequests { get; } = new();
-    public List<Request> OwnedRequests { get; } = new();
+    
+    // public List<Request> MyCreatedRequests { get; } = new();
+    // public List<Request> OwnedRequests { get; } = new();
 
     public static User Create(UserName username, Password password, Zone zone, Queue? queue, Role role = Role.User)
     {

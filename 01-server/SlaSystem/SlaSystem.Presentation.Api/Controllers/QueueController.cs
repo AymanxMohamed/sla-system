@@ -1,6 +1,7 @@
 using SlaSystem.Application.Queues.Commands;
 using SlaSystem.Application.Queues.Queries;
 using SlaSystem.Presentation.Api.Contracts.Queues;
+using SlaSystem.Presentation.Api.Utils;
 
 namespace SlaSystem.Presentation.Api.Controllers;
 
@@ -23,21 +24,26 @@ public class QueueController : ApiController
         var query = new GetQueuesQuery(); 
         
         var result = await Sender.Send(query, cancellationToken);
+
+        var queueDtos = result.Value.Select(AutoMapper.MapQueue).ToList();
         
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+        return result.IsSuccess ? Ok(Result.Success(queueDtos)) : BadRequest(result.Error);
     }
     
     [HttpPost("CreateQueue", Name = "CreateQueue")]
     [ProducesResponseType(typeof(Result<Queue>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<ActionResult<Result<Queue>>> CreateQueue([FromBody] CreateQueueRequest createQueueRequest, 
+    public async Task<ActionResult<Result<QueueDto>>> CreateQueue([FromBody] CreateQueueRequest createQueueRequest, 
         CancellationToken cancellationToken)
     {
         var command = new CreateQueueCommand(createQueueRequest.RequestType, 
             QueueName.Create(createQueueRequest.QueueName));
         
         var result = await Sender.Send(command, cancellationToken);
+
+        var queueDto = AutoMapper.MapQueue(result.Value);
         
-        return result.IsSuccess ? Created("/admin/queues", result) : BadRequest(result.Error);
+        return result.IsSuccess ? Created("/admin/queues", Result.Success(queueDto)) : 
+            BadRequest(result.Error);
     }
 }

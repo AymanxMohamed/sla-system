@@ -3,6 +3,7 @@ using SlaSystem.Application.Requests.Commands;
 using SlaSystem.Application.Requests.Queries;
 using SlaSystem.Application.Slas.Commands;
 using SlaSystem.Presentation.Api.Contracts.Requests;
+using SlaSystem.Presentation.Api.Utils;
 
 namespace SlaSystem.Presentation.Api.Controllers;
 
@@ -38,8 +39,10 @@ public class RequestController : ApiController
         var query = new GetClientRequestsQuery(Guid.Parse(userId)); 
         
         var result = await Sender.Send(query, cancellationToken);
+
+        var requestDtos = result.Value.Select(AutoMapper.MapRequest);
         
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+        return result.IsSuccess ? Ok(Result.Success(requestDtos)) : BadRequest(result.Error);
     }
     
     [HttpGet("GetRequest/{id}", Name = "GetRequest")]
@@ -51,7 +54,9 @@ public class RequestController : ApiController
         
         var result = await Sender.Send(query, cancellationToken);
         
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+        var requestDto = AutoMapper.MapRequest(result.Value);
+        
+        return result.IsSuccess ? Ok(Result.Success(requestDto)) : BadRequest(result.Error);
     }
     
     [HttpPost("CreateRequest", Name = "CreateRequest")]
@@ -64,8 +69,11 @@ public class RequestController : ApiController
             Description.Create(createRequestPayload.Description), Guid.Parse(createRequestPayload.ClientId));
         
         var result = await Sender.Send(command, cancellationToken);
+
+        var requestDto = AutoMapper.MapRequest(result.Value);
         
-        return result.IsSuccess ? Created("/client/requests", result) : BadRequest(result.Error);
+        return result.IsSuccess ? Created("/client/requests", Result.Success(requestDto)) : 
+            BadRequest(result.Error);
     }
     
         

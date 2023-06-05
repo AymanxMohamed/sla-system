@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SlaSystem.Application.Slas.Commands;
 using SlaSystem.Application.Slas.Queries;
 using SlaSystem.Presentation.Api.Contracts.Slas;
+using SlaSystem.Presentation.Api.Utils;
 
 namespace SlaSystem.Presentation.Api.Controllers;
 
@@ -24,8 +25,10 @@ public class SlaController : ApiController
         var query = new GetSlasQuery(); 
         
         var result = await Sender.Send(query, cancellationToken);
+
+        var slaDtos = result.Value.Select(AutoMapper.MapSla);
         
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+        return result.IsSuccess ? Ok(Result.Success(slaDtos)) : BadRequest(result.Error);
     }
     
     [HttpPost("CreateSla", Name = "CreateSla")]
@@ -38,7 +41,10 @@ public class SlaController : ApiController
             createSlaRequest.Severity, createSlaRequest.DurationInHours);
         
         var result = await Sender.Send(command, cancellationToken);
+            
+        var slaDto = AutoMapper.MapSla(result.Value);
         
-        return result.IsSuccess ? Created("/admin/slas", result) : BadRequest(result.Error);
+        return result.IsSuccess ? Created("/admin/slas", Result.Success(slaDto)) 
+            : BadRequest(result.Error);
     }
 }

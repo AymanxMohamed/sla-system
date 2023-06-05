@@ -18,14 +18,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(u => u.QueueId)
             .OnDelete(DeleteBehavior.NoAction);
         
-        builder.HasMany(u => u.MyCreatedRequests)
-            .WithOne(r => r.Client)
-            .HasForeignKey(r => r.ClientId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasMany(u => u.OwnedRequests)
-            .WithOne(r => r.Owner)
-            .HasForeignKey(r => r.OwnerId)
-            .OnDelete(DeleteBehavior.Restrict);
+        // builder.HasMany(u => u.MyCreatedRequests)
+        //     .WithOne(r => r.Client)
+        //     .HasForeignKey(r => r.ClientId)
+        //     .OnDelete(DeleteBehavior.Restrict);
+        //
+        // builder.HasMany(u => u.OwnedRequests)
+        //     .WithOne(r => r.Owner)
+        //     .HasForeignKey(r => r.OwnerId)
+        //     .OnDelete(DeleteBehavior.Restrict);
     }
 }

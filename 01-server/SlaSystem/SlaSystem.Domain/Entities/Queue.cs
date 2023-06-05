@@ -17,7 +17,7 @@ public class Queue : Entity
     public RequestType RequestType { get; }
     public List<User> Users { get; } = new();
 
-    internal void AddUser(User user) => Users.Add(user);
+    public void AddUser(User user) => Users.Add(user);
     
     public static Queue Create(
         RequestType requestType,
@@ -25,5 +25,5 @@ public class Queue : Entity
     {
         return new Queue(Guid.NewGuid(), queueName.Value, requestType);
     }
-    internal void RemoveUser(User user) => Users.Remove(user);
+    public void RemoveUser(User user) => Users.Remove(user);
 }

@@ -21,15 +21,15 @@ public class RequestConfiguration : IEntityTypeConfiguration<Request>
             .WithOne()
             .HasForeignKey<Request>(r => r.SlaId);
 
-        builder.HasOne(r => r.Owner)
-            .WithMany(u => u.OwnedRequests)
-            .HasForeignKey(r => r.OwnerId)
-            .OnDelete(DeleteBehavior.SetNull);
-
-        builder.HasOne(r => r.Client)
-            .WithMany(u => u.MyCreatedRequests)
-            .HasForeignKey(r => r.ClientId)
-            .OnDelete(DeleteBehavior.Restrict);
+        // builder.HasOne(r => r.Owner)
+        //     .WithMany(u => u.OwnedRequests)
+        //     .HasForeignKey(r => r.OwnerId)
+        //     .OnDelete(DeleteBehavior.SetNull);
+        //
+        // builder.HasOne(r => r.Client)
+        //     .WithMany(u => u.MyCreatedRequests)
+        //     .HasForeignKey(r => r.ClientId)
+        //     .OnDelete(DeleteBehavior.Restrict);
         
         
         builder.Property(r => r.SlaExpiredOn)

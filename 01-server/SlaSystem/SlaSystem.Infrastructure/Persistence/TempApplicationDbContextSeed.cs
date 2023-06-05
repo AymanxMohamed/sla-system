@@ -44,9 +44,9 @@ public static class TempApplicationDbContextSeed
             Request.Requests.AddRange(new []
             {
                 Request.Create(RequestType.Invoice, Description.Create("Invoice Request Type"),Sla.Slas[0], 
-                    User.Users[4].Id),
+                    User.Users[4]),
                 Request.Create(RequestType.Payment, Description.Create("Payment Request Type"),Sla.Slas[1], 
-                    User.Users[5].Id),
+                    User.Users[5]),
             });
         }
 

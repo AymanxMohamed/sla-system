@@ -1,4 +1,6 @@
 
+using SlaSystem.Presentation.Api.Utils;
+
 namespace SlaSystem.Presentation.Api.Controllers;
 
 [ApiController]
@@ -20,7 +22,8 @@ public class AuthController : ApiController
     {
         var command = new LoginCommand(UserName.Create(loginRequest.UserName), Password.Create(loginRequest.Password));
         var result = await Sender.Send(command, cancellationToken);
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+        var userDto = AutoMapper.MapUser(result.Value);
+        return result.IsSuccess ? Ok(Result.Success(userDto)) : BadRequest(result.Error);
     }
     
     [HttpPost("Register", Name = "Register")]

@@ -25,7 +25,7 @@ public class Request : Entity
     public string Description { get; private set; }
     public Guid OwnerId { get; private set; }
     public User? Owner { get; private set; }
-    public User? Client { get; }
+    public User Client { get; private init; }
     public Guid ClientId { get;  }
     public Sla Sla { get; private set; }
     public Guid SlaId { get; }
@@ -58,11 +58,12 @@ public class Request : Entity
         RequestType requestType,
         Description description,
         Sla sla,
-        Guid clientId)
+        User client)
     {
-        var request = new Request(Guid.NewGuid(), requestType, description.Value, sla.Id, clientId)
+        var request = new Request(Guid.NewGuid(), requestType, description.Value, sla.Id, client.Id)
         {
-            Sla = sla
+            Sla = sla,
+            Client = client
         };
         request.SetSlaExpiredOn();
         return request;

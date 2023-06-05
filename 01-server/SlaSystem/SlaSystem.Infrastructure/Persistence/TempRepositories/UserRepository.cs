@@ -13,9 +13,9 @@ public class TempUserRepository : IUserRepository
 
     public async Task<bool> IsUserNameUniqueAsync(UserName userName, CancellationToken cancellationToken)
     {
-        var user =  User.Users.FirstOrDefault(x => x.UserName == userName.Value)!;
+        var user =  User.Users.FirstOrDefault(x => x.UserName == userName.Value);
 
-        return user.UserName == userName.Value;
+        return user is null;
     }
 
     public async Task<bool> IsValidPasswordAsync(UserName userName, Password password, CancellationToken cancellationToken)

@@ -1,3 +1,9 @@
 ﻿namespace SlaSystem.Presentation.Api.Contracts.Users;
 
-public record UserDto();
+public sealed record UserDto(
+    string Id,
+    string UserName,
+    string Password,
+    string Role,
+    string Zone,
+    string QueueId);
