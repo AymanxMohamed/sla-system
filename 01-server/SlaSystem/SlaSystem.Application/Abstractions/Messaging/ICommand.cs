@@ -1,6 +1,14 @@
-﻿namespace SlaSystem.Application.Abstractions.Messaging;
+﻿using MediatR;
+using SlaSystem.Domain.Shared;
 
-public interface ICommand
+namespace SlaSystem.Application.Abstractions.Messaging;
+
+public interface ICommand : IRequest<Result>
+{
+    
+}
+
+public interface ICommand<TResponse> : IRequest<Result<TResponse>>
 {
     
 }

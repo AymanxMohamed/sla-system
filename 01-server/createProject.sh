@@ -43,6 +43,8 @@ dotnet add SlaSystem.Infrastrucutre package Microsoft.Extensions.Options -v 6.0.
 dotnet add SlaSystem.Infrastrucutre package Microsoft.EntityFrameworkCore.Sqlite --version 6.0.16
 dotnet add SlaSystem.Infrastrucutre package System.Data.SQLite  -v 1.0.117
 dotnet add SlaSystem.Infrastrucutre package Microsoft.Extensions.Hosting -v 6.0.1
+dotnet add SlaSystem.Application/ package MediatR.Extensions.Microsoft.DependencyInjection --version 11.1.0
+
 
 # Restoring Packages 
 dotnet restore SlaSystem.sln

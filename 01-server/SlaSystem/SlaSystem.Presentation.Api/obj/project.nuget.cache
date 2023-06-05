@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "ox3r0JTmQj1vxMYb02JZBS5UPdUihT5wiqUGBNMuuMRbhkNDhZZZJm6UBkerK4vQk/moEs9Ytw4xLhcmyu7P8w==",
-  "success": true,
+  "dgSpecHash": "tByICBbyvv0TM5sf23FlnZ2uqpHV20sKY0s0nVne2+lq0p6WPPgEaaHLrm1jj5Qvoh0RNNlMRXObbJfqSttcTA==",
+  "success": false,
   "projectFilePath": "D:\\09-Projects\\Tasks-for-companies\\SLA-System\\01-server\\SlaSystem\\SlaSystem.Presentation.Api\\SlaSystem.Presentation.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ayman\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\ayman\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
+    "C:\\Users\\ayman\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\ayman\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "C:\\Users\\ayman\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\ayman\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.16\\microsoft.data.sqlite.core.6.0.16.nupkg.sha512",
     "C:\\Users\\ayman\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.16\\microsoft.entityframeworkcore.6.0.16.nupkg.sha512",
@@ -81,5 +84,15 @@
     "C:\\Users\\ayman\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
     "C:\\Users\\ayman\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Detected package downgrade: Microsoft.Extensions.DependencyInjection.Abstractions from 7.0.0 to 6.0.0. Reference the package directly from the project to select a different version. \r\n SlaSystem.Presentation.Api -> SlaSystem.Application -> MediatR.Extensions.Microsoft.DependencyInjection 11.1.0 -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 7.0.0) \r\n SlaSystem.Presentation.Api -> SlaSystem.Application -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 6.0.0)",
+      "libraryId": "Microsoft.Extensions.DependencyInjection.Abstractions",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
