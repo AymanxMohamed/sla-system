@@ -6,8 +6,10 @@ public class TempRequestRepository : IRequestRepository
 {
     public async Task AssignUserToRequestAsync(Guid ownerId, Guid requestId, CancellationToken cancellationToken)
     {
-        var request = Request.Requests.FirstOrDefault(r => r.Id == requestId)!;
-        request.Assign(ownerId);
+        var request = Request.Requests.FirstOrDefault(r => r.Id == requestId);
+        var owner = User.Users.FirstOrDefault(u => u.Id == ownerId);
+        if (owner == null || request == null) return; 
+        request.Assign(owner);
     }
 
     public async Task CloseRequestAsync(Guid requestId, CancellationToken cancellationToken)

@@ -61,7 +61,7 @@ public class RequestController : ApiController
             return BadRequest(failure.Error);
         }
         
-        var query = new GetClientRequestsQuery(guid); 
+        var query = new GetUserRequestsQuery(guid); 
         
         var result = await Sender.Send(query, cancellationToken);
 
@@ -149,7 +149,7 @@ public class RequestController : ApiController
             return BadRequest(failure.Error);
         }
         
-        var isRequestParsed = Guid.TryParse(assignRequestPayload.OwnerId, out var requestGuid);
+        var isRequestParsed = Guid.TryParse(assignRequestPayload.RequestId, out var requestGuid);
         
         if (!isRequestParsed)
         {

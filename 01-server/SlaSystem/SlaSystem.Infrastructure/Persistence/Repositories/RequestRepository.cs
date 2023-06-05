@@ -15,8 +15,10 @@ public class RequestRepository : IRequestRepository
     {
         var request = await _context.Requests.FirstOrDefaultAsync(x => x.Id == requestId,
             cancellationToken: cancellationToken);
-        if (request == null) return;
-        request.Assign(ownerId);
+        var owner = await _context.Users.FirstOrDefaultAsync(x => x.Id == ownerId,
+            cancellationToken: cancellationToken);
+        if (request == null || owner == null) return;
+        request.Assign(owner);
         _context.Requests.Update(request);
     }
 

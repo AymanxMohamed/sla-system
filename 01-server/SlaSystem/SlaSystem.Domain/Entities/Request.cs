@@ -45,7 +45,11 @@ public class Request : Entity
     public DateTime SlaExpiredOn { get; private set; }
     public DateTime ClosedAt { get; private set; }
 
-    public void Assign(Guid ownerId) => OwnerId = ownerId;
+    public void Assign(User owner)
+    {
+        Owner = owner;
+        OwnerId = owner.Id;
+    }
 
 
     public void Close()
