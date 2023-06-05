@@ -1,74 +1,46 @@
 ﻿[
   {
     "Id": "1d60e268-27a6-4b4f-88fc-53a6e672e0ae",
-    "UserName": {
-      "Value": "egypt_admin"
-    },
-    "Password": {
-      "Value": "egypt_admin"
-    },
+    "UserName": "egypt_admin",
+    "Password": "egypt_admin",
     "Role": 0,
-    "Zone" : {
-      "Value": "EGP"
-    }
+    "Zone" : "EGP"
   },
   {
     "Id": "a6a9d5bf-9fb9-4a1e-b90b-9f09f1351f8d",
-    "UserName": {
-      "Value": "uae_admin"
-    },
-    "Password": {
-      "Value": "uae_admin"
-    },
+    "UserName": "uae_admin",
+    "Password": "uae_admin",
     "Role": 0,
-    "Zone" : {
-      "Value": "UAE"
-    }
+    "Zone" : "UAE"
   },
   {
     "Id": "7b4a7f66-0d6b-4f6a-9f41-501cfd265ab7",
-    "UserName":{
-      "Value": "user1"
-    },
-    "Password": {
-      "Value": "user1"
-    },
+    "UserName": "user1",
+    "Password": "user1",
     "Role": 1,
     "QueueId": "e0fd29d9-6d33-48f4-ae59-3c4f2d354e33",
-    "Zone" : {
-      "Value": "EGP"
-    }
+    "Zone" : "EGP"
   },
   {
     "Id": "f96d2b39-c137-413e-876a-9269472a00b1",
-    "UserName": {
-      "Value": "user2"
-    },
-    "Password": {
-      "Value": "user2"
-    },
+    "UserName": "user2",
+    "Password": "user2",
     "Role": 1,
     "QueueId": "2fc3dc95-1fd6-4e15-a30d-8401ad4a5f63",
-    "Zone" :  {
-      "Value": "UAE"
-    }
+    "Zone" :  "UAE"
   },
   {
     "Id": "4f6ac1d5-0e39-4f7d-b103-83a48b15c0bc",
     "UserName": "client1",
     "Password": "client1",
     "Role": 2,
-    "Zone" :  {
-      "Value": "EGP"
-    }
+    "Zone" : "EGP"
   },
   {
     "Id": "0d8e6c9d-87ab-4d7d-b9e1-6c319812c0f2",
     "UserName": "client2",
     "Password": "client2",
     "Role": 2,
-    "Zone" :  {
-      "Value": "UAE"
-    }
+    "Zone" : "UAE"
   }
 ]
