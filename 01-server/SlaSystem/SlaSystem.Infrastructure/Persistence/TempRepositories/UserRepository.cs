@@ -25,9 +25,9 @@ public class TempUserRepository : IUserRepository
         return user.UserName == userName.Value &&  user.Password == password.Value;
     }
 
-    public async Task<User> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)
+    public async Task<User?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)
     {
-        return User.Users.FirstOrDefault(x => x.Id == userId)!;
+        return User.Users.FirstOrDefault(x => x.Id == userId);
     }
 
     public async Task<User> GetUserByUserNameAsync(UserName userName, CancellationToken cancellationToken)

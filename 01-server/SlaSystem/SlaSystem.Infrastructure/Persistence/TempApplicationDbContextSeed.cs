@@ -34,8 +34,8 @@ public static class TempApplicationDbContextSeed
                 CreateUser("uae_admin", "uae_admin", "UAE", null, Role.Admin),
                 CreateUser("egypt_user", "egypt_user", "EGP", Queue.Queues[0], Role.User),
                 CreateUser("uae_user", "uae_user", "UAE", Queue.Queues[1], Role.User),
-                CreateUser("egypt_client", "egypt_client", "EGP", null, Role.User),
-                CreateUser("uae_client", "uae_client", "EGP", null, Role.User),
+                CreateUser("egypt_client", "egypt_client", "EGP", null, Role.Client),
+                CreateUser("uae_client", "uae_client", "EGP", null, Role.Client),
             });
         }
 

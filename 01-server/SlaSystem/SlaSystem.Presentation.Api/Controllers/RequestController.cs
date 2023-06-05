@@ -28,7 +28,12 @@ public class RequestController : ApiController
         
         var result = await Sender.Send(query, cancellationToken);
         
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+        if (result.IsFailure)
+            return BadRequest(result.Error);
+        
+        var requestDtos = result.Value.Select(AutoMapper.MapRequest);
+        
+        return Ok(Result.Success(requestDtos));
     }
     
     [HttpGet("GetUserRequests/{userId}", Name = "GetUserRequests")]
@@ -40,9 +45,12 @@ public class RequestController : ApiController
         
         var result = await Sender.Send(query, cancellationToken);
 
-        var requestDtos = result.Value.Select(AutoMapper.MapRequest);
+        if (result.IsFailure)
+            return BadRequest(result.Error);
         
-        return result.IsSuccess ? Ok(Result.Success(requestDtos)) : BadRequest(result.Error);
+        var requestDtos = result.Value.Select(AutoMapper.MapRequest);
+
+        return Ok(Result.Success(requestDtos));
     }
     
     [HttpGet("GetRequest/{id}", Name = "GetRequest")]
@@ -54,9 +62,12 @@ public class RequestController : ApiController
         
         var result = await Sender.Send(query, cancellationToken);
         
-        var requestDto = AutoMapper.MapRequest(result.Value);
+        if (result.IsFailure)
+            return BadRequest(result.Error);
         
-        return result.IsSuccess ? Ok(Result.Success(requestDto)) : BadRequest(result.Error);
+        var requestDto = AutoMapper.MapRequest(result.Value);
+
+        return Ok(Result.Success(requestDto));
     }
     
     [HttpPost("CreateRequest", Name = "CreateRequest")]
@@ -70,10 +81,12 @@ public class RequestController : ApiController
         
         var result = await Sender.Send(command, cancellationToken);
 
-        var requestDto = AutoMapper.MapRequest(result.Value);
+        if (result.IsFailure)
+            return BadRequest(result.Error);
         
-        return result.IsSuccess ? Created("/client/requests", Result.Success(requestDto)) : 
-            BadRequest(result.Error);
+        var requestDto = AutoMapper.MapRequest(result.Value);
+
+        return Created("/client/requests", Result.Success(requestDto));
     }
     
         

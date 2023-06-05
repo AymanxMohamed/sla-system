@@ -24,10 +24,13 @@ public class QueueController : ApiController
         var query = new GetQueuesQuery(); 
         
         var result = await Sender.Send(query, cancellationToken);
-
+        
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
+        
         var queueDtos = result.Value.Select(AutoMapper.MapQueue).ToList();
         
-        return result.IsSuccess ? Ok(Result.Success(queueDtos)) : BadRequest(result.Error);
+        return Ok(Result.Success(queueDtos)) ;
     }
     
     [HttpPost("CreateQueue", Name = "CreateQueue")]
@@ -40,10 +43,12 @@ public class QueueController : ApiController
             QueueName.Create(createQueueRequest.QueueName));
         
         var result = await Sender.Send(command, cancellationToken);
+        
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
 
         var queueDto = AutoMapper.MapQueue(result.Value);
-        
-        return result.IsSuccess ? Created("/admin/queues", Result.Success(queueDto)) : 
-            BadRequest(result.Error);
+
+        return Created("/admin/queues", Result.Success(queueDto));
     }
 }

@@ -25,10 +25,13 @@ public class SlaController : ApiController
         var query = new GetSlasQuery(); 
         
         var result = await Sender.Send(query, cancellationToken);
-
+   
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
+        
         var slaDtos = result.Value.Select(AutoMapper.MapSla);
         
-        return result.IsSuccess ? Ok(Result.Success(slaDtos)) : BadRequest(result.Error);
+        return Ok(Result.Success(slaDtos));
     }
     
     [HttpPost("CreateSla", Name = "CreateSla")]
@@ -41,10 +44,13 @@ public class SlaController : ApiController
             createSlaRequest.Severity, createSlaRequest.DurationInHours);
         
         var result = await Sender.Send(command, cancellationToken);
-            
-        var slaDto = AutoMapper.MapSla(result.Value);
+           
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
         
-        return result.IsSuccess ? Created("/admin/slas", Result.Success(slaDto)) 
-            : BadRequest(result.Error);
+        var slaDto = AutoMapper.MapSla(result.Value);
+
+        return Created("/admin/slas", Result.Success(slaDto));
+
     }
 }

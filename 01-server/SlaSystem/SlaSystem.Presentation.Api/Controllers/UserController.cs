@@ -1,4 +1,6 @@
 
+using SlaSystem.Presentation.Api.Utils;
+
 namespace SlaSystem.Presentation.Api.Controllers;
 
 [ApiController]
@@ -20,8 +22,13 @@ public class UserController : ApiController
         var query = new GetUsersByRoleQuery(role); 
         
         var result = await Sender.Send(query, cancellationToken);
+           
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
         
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+        var userDtos = result.Value.Select(AutoMapper.MapUser);
+        
+        return Ok( Result.Success(userDtos));
     }
     
     [HttpPost("CreateUser", Name = "CreateUser")]
@@ -36,7 +43,12 @@ public class UserController : ApiController
             Guid.Parse(createUserRequest.QueueId), 
             Role.User);
         var result = await Sender.Send(command, cancellationToken);
-        return result.IsSuccess ? Created("/admin/users", result) : BadRequest(result.Error);
+        
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
+        
+        var userDto = AutoMapper.MapUser(result.Value);
+        return Created("/admin/users", Result.Success(userDto));
     }
     
     [HttpPost("CreateAdmin", Name = "CreateAdmin")]
@@ -50,7 +62,9 @@ public class UserController : ApiController
             Role.Admin);
         
         var result = await Sender.Send(command, cancellationToken);
-
-        return result.IsSuccess ? Created("/admin/admins", result): BadRequest(result.Error);
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
+        var userDto = AutoMapper.MapUser(result.Value);
+        return Created("/admin/admins", Result.Success(userDto));
     }
 }

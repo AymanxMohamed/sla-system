@@ -22,8 +22,10 @@ public class AuthController : ApiController
     {
         var command = new LoginCommand(UserName.Create(loginRequest.UserName), Password.Create(loginRequest.Password));
         var result = await Sender.Send(command, cancellationToken);
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
         var userDto = AutoMapper.MapUser(result.Value);
-        return result.IsSuccess ? Ok(Result.Success(userDto)) : BadRequest(result.Error);
+        return Ok(Result.Success(userDto));
     }
     
     [HttpPost("Register", Name = "Register")]
@@ -36,7 +38,9 @@ public class AuthController : ApiController
             Password.Create(registerRequest.Password), Zone.Create(registerRequest.Zone), null, Role.Client);
         
         var result = await Sender.Send(command, cancellationToken);
-
-        return result.IsSuccess ? Created("/auth/login", result): BadRequest(result.Error);
+        if (result.IsFailure)
+            return BadRequest(result.Error); 
+        var userDto = AutoMapper.MapUser(result.Value);
+        return Created("/auth/login", Result.Success(userDto));
     }
 }

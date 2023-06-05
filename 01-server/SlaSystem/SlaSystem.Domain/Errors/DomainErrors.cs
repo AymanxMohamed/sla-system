@@ -8,6 +8,8 @@ public static class DomainErrors
     {
         public static readonly Error SlaExpired = new("Request.SlaExpired", 
             "Can't Close this request because the sla has been expired");
+        public static readonly Error InvalidClient = new("Request.InvalidClient", 
+            "Their is no client with this Id");
     }
 
     public static class User

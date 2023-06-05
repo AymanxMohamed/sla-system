@@ -20,6 +20,8 @@ public class CreateRequestCommandHandler : ICommandHandler<CreateRequestCommand,
     {
         var sla = await _slaRepository.GetSlasByRequestTypeAsync(req.RequestType, cancellationToken);
         var client = await _userRepository.GetUserByIdAsync(req.ClientId, cancellationToken);
+        if (client is null)
+            return Result.Failure<Request>(DomainErrors.Request.InvalidClient);
         var request = Request.Create(req.RequestType, req.Description, sla, client);
         
         var createdRequest = await _requestRepository.CreateRequest(request, cancellationToken);
