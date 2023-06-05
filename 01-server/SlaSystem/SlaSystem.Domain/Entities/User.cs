@@ -10,4 +10,5 @@ public class User : Entity
     public Password Password { get; set; } = Password.Create(string.Empty);
     public Role Role { get; set; } = Role.Client;
     public Zone Zone { get; set; } = Zone.Create(string.Empty);
+    public Queue Queue { get; set; }
 }
