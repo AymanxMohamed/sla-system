@@ -58,7 +58,7 @@ public class Request : Entity
         Sla sla,
         Guid clientId)
     {
-        var request = new Request(new Guid(), requestType, description, sla, clientId);
+        var request = new Request(Guid.NewGuid(), requestType, description, sla, clientId);
         request.SetSlaExpiredOn();
         return request;
     }

@@ -23,5 +23,5 @@ public class Sla : Entity
     
     public static Sla Create(
         RequestType requestType, Severity severity, double durationInHours) =>
-        new Sla(new Guid(), requestType, severity, durationInHours);
+        new Sla(Guid.NewGuid(), requestType, severity, durationInHours);
 }

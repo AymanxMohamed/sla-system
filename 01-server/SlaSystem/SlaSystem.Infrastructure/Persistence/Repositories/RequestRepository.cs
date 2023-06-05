@@ -1,7 +1,4 @@
-﻿using SlaSystem.Domain.Entities;
-using SlaSystem.Domain.Enums;
-
-namespace SlaSystem.Infrastructure.Repositories;
+﻿namespace SlaSystem.Infrastructure.Persistence.Repositories;
 
 public class RequestRepository : IRequestRepository
 {

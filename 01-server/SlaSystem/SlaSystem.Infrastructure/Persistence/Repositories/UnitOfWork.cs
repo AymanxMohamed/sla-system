@@ -1,5 +1,4 @@
-﻿
-namespace SlaSystem.Infrastructure.Repositories;
+﻿namespace SlaSystem.Infrastructure.Persistence.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {

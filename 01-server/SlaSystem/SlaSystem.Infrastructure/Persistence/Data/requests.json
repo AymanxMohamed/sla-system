@@ -1,0 +1,84 @@
+﻿[
+  {
+    "Id": "3c5a0b87-61e3-4317-afcb-0ac139fd34cc",
+    "RequestType": 0,
+    "Description": "Invoice Request Type",
+    "OwnerId": "7b4a7f66-0d6b-4f6a-9f41-501cfd265ab7",
+    "ClientId": "4f6ac1d5-0e39-4f7d-b103-83a48b15c0bc",
+    "SlaId": "8b9a1d76-6e16-45a3-9313-6b486fde8e3d",
+    "CreatedAt": "2023-06-05 13:45:32",
+    "RequestStatus": 0,
+    "SlaStatus": 0,
+    "SlaExpiredOn": "2023-06-05 15:45:32",
+    "Sla": {
+      "Id": "8b9a1d76-6e16-45a3-9313-6b486fde8e3d",
+      "RequestType": 0,
+      "Severity": 2,
+      "DurationInHours": 2
+    },
+    "Owner": {
+      "Id": "7b4a7f66-0d6b-4f6a-9f41-501cfd265ab7",
+      "UserName":{
+        "Value": "user1"
+      },
+      "Password": {
+        "Value": "user1"
+      },
+      "Role": 1,
+      "QueueId": "e0fd29d9-6d33-48f4-ae59-3c4f2d354e33",
+      "Zone" : {
+        "Value": "EGP"
+      }
+    },
+    "Client": {
+      "Id": "4f6ac1d5-0e39-4f7d-b103-83a48b15c0bc",
+      "UserName": "client1",
+      "Password": "client1",
+      "Role": 2,
+      "Zone" :  {
+        "Value": "EGP"
+      }
+    }
+  },
+  {
+    "Id": "74b4ce8c-2a74-4f56-8d91-d4a267c5d225",
+    "RequestType": 1,
+    "Description": "Payment Request Type",
+    "OwnerId": "f96d2b39-c137-413e-876a-9269472a00b1",
+    "ClientId": "0d8e6c9d-87ab-4d7d-b9e1-6c319812c0f2",
+    "SlaId": "dce14d79-408a-4b25-894a-bb150d7f31b6",
+    "CreatedAt": "2023-06-05 14:30:00",
+    "RequestStatus": 0,
+    "SlaStatus": 0,
+    "SlaExpiredOn": "2023-06-05 18:30:00",
+    "Sla": {
+      "Id": "dce14d79-408a-4b25-894a-bb150d7f31b6",
+      "RequestType": 1,
+      "Severity": 1,
+      "DurationInHours": 4
+    },
+    "Owner": {
+      "Id": "f96d2b39-c137-413e-876a-9269472a00b1",
+      "UserName": {
+        "Value": "user2"
+      },
+      "Password": {
+        "Value": "user2"
+      },
+      "Role": 1,
+      "QueueId": "2fc3dc95-1fd6-4e15-a30d-8401ad4a5f63",
+      "Zone" :  {
+        "Value": "UAE"
+      }
+    },
+    "Client": {
+      "Id": "0d8e6c9d-87ab-4d7d-b9e1-6c319812c0f2",
+      "UserName": "client2",
+      "Password": "client2",
+      "Role": 2,
+      "Zone" :  {
+        "Value": "UAE"
+      }
+    }
+  }
+]

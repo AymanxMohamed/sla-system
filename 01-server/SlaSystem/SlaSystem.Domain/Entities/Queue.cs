@@ -23,7 +23,7 @@ public class Queue : Entity
         RequestType requestType,
         QueueName queueName)
     {
-        return new Queue(new Guid(), queueName, requestType);
+        return new Queue(Guid.NewGuid(), queueName, requestType);
     }
     internal void RemoveUser(User user) => _users.Remove(user);
 }

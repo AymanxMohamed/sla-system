@@ -1,8 +1,6 @@
-﻿using SlaSystem.Domain.Entities;
-using SlaSystem.Domain.Enums;
-using SlaSystem.Domain.ValueObjects;
+﻿using SlaSystem.Domain.ValueObjects;
 
-namespace SlaSystem.Infrastructure.Repositories;
+namespace SlaSystem.Infrastructure.Persistence.Repositories;
 
 public class UserRepository : IUserRepository
 {

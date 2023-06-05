@@ -24,7 +24,7 @@ public class User : Entity
 
     public static User Create(UserName username, Password password, Zone zone, Queue? queue, Role role = Role.User)
     {
-        var user = new User(new Guid(), username, password, zone, queue, role);
+        var user = new User(Guid.NewGuid(), username, password, zone, queue, role);
         queue?.AddUser(user);
         return user;
     }

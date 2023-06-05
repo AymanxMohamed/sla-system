@@ -1,0 +1,44 @@
+﻿[
+  {
+    "Id": "e0fd29d9-6d33-48f4-ae59-3c4f2d354e33",
+    "QueueName": "Invoice Queue",
+    "RequestType": 0,
+    "Users": [
+      {
+        "Id": "7b4a7f66-0d6b-4f6a-9f41-501cfd265ab7",
+        "UserName":{
+          "Value": "user1"
+        },
+        "Password": {
+          "Value": "user1"
+        },
+        "Role": 1,
+        "QueueId": "e0fd29d9-6d33-48f4-ae59-3c4f2d354e33",
+        "Zone" : {
+          "Value": "EGP"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "2fc3dc95-1fd6-4e15-a30d-8401ad4a5f63",
+    "QueueName": "Payment Queue",
+    "RequestType": 1,
+    "Users": [
+      {
+        "Id": "f96d2b39-c137-413e-876a-9269472a00b1",
+        "UserName": {
+          "Value": "user2"
+        },
+        "Password": {
+          "Value": "user2"
+        },
+        "Role": 1,
+        "QueueId": "2fc3dc95-1fd6-4e15-a30d-8401ad4a5f63",
+        "Zone" :  {
+          "Value": "EGP"
+        }
+      }
+    ]
+  }
+]

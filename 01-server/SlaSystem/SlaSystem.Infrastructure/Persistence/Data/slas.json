@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Id": "8b9a1d76-6e16-45a3-9313-6b486fde8e3d",
+    "RequestType": 0,
+    "Severity": 2,
+    "DurationInHours": 2
+  },
+  {
+    "Id": "dce14d79-408a-4b25-894a-bb150d7f31b6",
+    "RequestType": 1,
+    "Severity": 1,
+    "DurationInHours": 4
+  }
+]
