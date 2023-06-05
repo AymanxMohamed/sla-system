@@ -11,8 +11,6 @@
 
   <ItemGroup>
     <Folder Include="Authentication\Queries" />
-    <Folder Include="Queues\Queries" />
-    <Folder Include="Slas\Queries" />
   </ItemGroup>
 
   <PropertyGroup>
