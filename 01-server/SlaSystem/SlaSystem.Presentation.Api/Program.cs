@@ -1,11 +1,9 @@
 using SlaSystem.Presentation.Api;
+using SlaSystem.Presentation.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    .AddApplication()
-    .AddInfrastructure()
-    .AddPresentation();
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 

@@ -13,7 +13,7 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> IsUserNameUniqueAsync(UserName userName, CancellationToken cancellationToken)
     {
-        return true;
+        return false;
     }
 
     public async Task<bool> IsValidPasswordAsync(UserName userName, Password password, CancellationToken cancellationToken)
@@ -28,7 +28,9 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserByUserNameAsync(UserName userName, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var createdUser =  User.Create(UserName.Create("Ayman"), Password.Create("123154"), Zone.Create("EGP"), 
+            null);
+        return createdUser;
     }
 
     public async Task<List<User>> GetUsersByQueueAsync(Queue queue, CancellationToken cancellationToken)

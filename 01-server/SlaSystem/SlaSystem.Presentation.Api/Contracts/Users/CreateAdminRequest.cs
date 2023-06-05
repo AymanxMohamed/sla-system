@@ -1,6 +1,7 @@
-﻿namespace SlaSystem.Presentation.Api.Contracts.Authentication;
+﻿
+namespace SlaSystem.Presentation.Api.Contracts.Users;
 
-public class RegisterRequest
+public class CreateAdminRequest
 {
     public string UserName { get; } = string.Empty;
     public string Password { get; } = string.Empty;

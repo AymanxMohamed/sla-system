@@ -5,7 +5,7 @@ namespace SlaSystem.Domain.ValueObjects;
 public class Description : ValueObject
 {
     private Description(string value) => Value = value;
-    private string Value { get;  }
+    public string Value { get;  }
 
     public static Description Create(string description) => new Description(description);
 

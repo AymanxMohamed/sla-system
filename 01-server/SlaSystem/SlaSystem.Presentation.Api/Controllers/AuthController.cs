@@ -1,6 +1,3 @@
-using MediatR;
-using SlaSystem.Application.Authentication.Commands;
-using SlaSystem.Presentation.Api.Abstractions;
 
 namespace SlaSystem.Presentation.Api.Controllers;
 
@@ -15,12 +12,28 @@ public class AuthController : ApiController
         _logger = logger;
     }
 
-    [HttpPost]
+    [HttpPost("Login", Name = "Login")]
+    [ProducesResponseType(typeof(Result<User>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<Result<User>>> Login([FromBody] LoginRequest loginRequest, 
         CancellationToken cancellationToken)
     {
         var command = new LoginCommand(UserName.Create(loginRequest.UserName), Password.Create(loginRequest.Password));
         var result = await Sender.Send(command, cancellationToken);
         return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+    }
+    
+    [HttpPost("Register", Name = "Register")]
+    [ProducesResponseType(typeof(Result<User>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<Result<User>>> Register([FromBody] RegisterRequest registerRequest, 
+        CancellationToken cancellationToken)
+    {
+        var command = new CreateUserCommand(UserName.Create(registerRequest.UserName), 
+            Password.Create(registerRequest.Password), Zone.Create(registerRequest.Zone), null, Role.Client);
+        
+        var result = await Sender.Send(command, cancellationToken);
+
+        return result.IsSuccess ? Created("/auth/login", result): BadRequest(result.Error);
     }
 }

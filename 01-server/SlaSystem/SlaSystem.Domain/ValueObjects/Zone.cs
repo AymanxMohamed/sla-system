@@ -5,7 +5,7 @@ namespace SlaSystem.Domain.ValueObjects;
 public class Zone : ValueObject
 {
     private Zone(string value) => Value = value;
-    private string Value { get;  }
+    public string Value { get;  }
 
     public static Zone Create(string zone) => new Zone(zone);
 
