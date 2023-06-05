@@ -6,6 +6,7 @@ namespace SlaSystem.Domain.Entities;
 
 public class User : Entity
 {
+    public static readonly List<User> Users = new();
     private User(Guid id, string userName, string password, string zone, Guid queueId, Role role) 
         : base(id)
     {

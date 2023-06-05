@@ -6,6 +6,7 @@ namespace SlaSystem.Domain.Entities;
 
 public class Request : Entity
 {
+    public static readonly List<Request> Requests = new();
     private SlaStatus _slaStatus = SlaStatus.Active;
     private Request(
         Guid id,

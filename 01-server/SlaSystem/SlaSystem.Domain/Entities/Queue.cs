@@ -6,6 +6,7 @@ namespace SlaSystem.Domain.Entities;
 
 public class Queue : Entity
 {
+    public static readonly List<Queue> Queues = new();
     private Queue(Guid id, string queueName, RequestType requestType) : base(id)
     {
         QueueName = queueName;

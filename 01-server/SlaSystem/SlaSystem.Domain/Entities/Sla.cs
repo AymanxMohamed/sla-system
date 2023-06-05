@@ -5,6 +5,7 @@ namespace SlaSystem.Domain.Entities;
 
 public class Sla : Entity
 {
+    public static readonly List<Sla> Slas = new();
     private Sla(Guid id,RequestType requestType, Severity severity, double durationInHours) : base(id)
     {
         RequestType = requestType;

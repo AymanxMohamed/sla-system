@@ -25,20 +25,23 @@ var app = builder.Build();
     app.MapControllers();
 }
 
+await TempApplicationDbContextSeed.SeedAsync();
 
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-var context = services.GetRequiredService<ApplicationDbContext>();
-var logger = services.GetRequiredService<ILogger<Program>>();
-try
-{
-    await context.Database.MigrateAsync();
-    await ApplicationDbContextSeed.SeedAsync(context);
-}
-catch (Exception ex)
-{
-    logger.LogError(ex, "An error occured during migration");
-}
+#region Database Seed Disabled
+// using var scope = app.Services.CreateScope();
+// var services = scope.ServiceProvider;
+// var context = services.GetRequiredService<ApplicationDbContext>();
+// var logger = services.GetRequiredService<ILogger<Program>>();
+// try
+// {
+//     await context.Database.MigrateAsync();
+//     await ApplicationDbContextSeed.SeedAsync(context);
+// }
+// catch (Exception ex)
+// {
+//     logger.LogError(ex, "An error occured during migration");
+// }
 
+#endregion
 
 app.Run();

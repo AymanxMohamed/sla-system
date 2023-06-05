@@ -35,7 +35,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)
     {
-        return (await _context.Users.FirstOrDefaultAsync(x => x.Id == userId,
+        return (await _context.Users.Include(x => x.Queue).FirstOrDefaultAsync(x => x.Id == userId,
             cancellationToken: cancellationToken))!;
     }
 
