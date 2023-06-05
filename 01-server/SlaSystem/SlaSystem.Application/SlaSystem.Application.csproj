@@ -9,6 +9,14 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Authentication\Commands" />
+    <Folder Include="Queues\Commands" />
+    <Folder Include="Queues\Queries" />
+    <Folder Include="Sla\Commands" />
+    <Folder Include="Sla\Queries" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

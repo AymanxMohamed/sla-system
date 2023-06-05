@@ -21,7 +21,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, User>
     {
         User user;
 
-        var isUserNameUnique = await _userRepository.IsUserNameUnique(request.UserName, cancellationToken);
+        var isUserNameUnique = await _userRepository.IsUserNameUniqueAsync(request.UserName, cancellationToken);
 
         if (!isUserNameUnique)
             return Result.Failure<User>(DomainErrors.User.DuplicateUserName);

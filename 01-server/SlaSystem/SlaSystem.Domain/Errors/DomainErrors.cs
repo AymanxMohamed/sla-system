@@ -14,5 +14,11 @@ public static class DomainErrors
     {
         public static readonly Error DuplicateUserName = new("User.DuplicateUserName", 
             "Can't Create Request with this user because it's used before");
+        
+        public static readonly Error InvalidUserName = new("User.InvalidUserName", 
+            "Invalid User Name");
+            
+        public static readonly Error InvalidPassword = new("User.InvalidPassword", 
+            "Invalid Password");
     }
 }
