@@ -57,7 +57,7 @@ public class RequestController : ApiController
     [HttpPost("CreateRequest", Name = "CreateRequest")]
     [ProducesResponseType(typeof(Result<Request>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<ActionResult<Result<Request>>> CreateSla([FromBody] CreateRequestPayload createRequestPayload, 
+    public async Task<ActionResult<Result<Request>>> CreateRequest([FromBody] CreateRequestPayload createRequestPayload, 
         CancellationToken cancellationToken)
     {
         var command = new CreateRequestCommand(createRequestPayload.RequestType,
@@ -67,4 +67,32 @@ public class RequestController : ApiController
         
         return result.IsSuccess ? Created("/client/requests", result) : BadRequest(result.Error);
     }
+    
+        
+    [HttpPatch("AssignRequest", Name = "AssignRequest")]
+    [ProducesResponseType(typeof(Result<Result>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<Result>> AssignRequest([FromBody] AssignRequestPayload assignRequestPayload, 
+        CancellationToken cancellationToken)
+    {
+        var command = new AssignUserToRequestCommand(Guid.Parse(assignRequestPayload.OwnerId), 
+            Guid.Parse(assignRequestPayload.RequestId));
+        
+        var result = await Sender.Send(command, cancellationToken);
+        
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+    }
+    
+    [HttpPatch("CloseRequest/{requestId}", Name = "CloseRequest")]
+    [ProducesResponseType(typeof(Result<Result>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<Result>> CloseRequest(string requestId, CancellationToken cancellationToken)
+    {
+        var command = new CloseRequestCommand(Guid.Parse(requestId));
+        
+        var result = await Sender.Send(command, cancellationToken);
+        
+        return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+    }
+    
 }

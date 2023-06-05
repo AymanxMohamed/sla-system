@@ -30,11 +30,11 @@ public class QueueController : ApiController
     [HttpPost("CreateQueue", Name = "CreateQueue")]
     [ProducesResponseType(typeof(Result<Queue>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<ActionResult<Result<Queue>>> CreateQueue([FromBody] CreateQueueRequest createQueueCommand, 
+    public async Task<ActionResult<Result<Queue>>> CreateQueue([FromBody] CreateQueueRequest createQueueRequest, 
         CancellationToken cancellationToken)
     {
-        var command = new CreateQueueCommand(createQueueCommand.RequestType, 
-            QueueName.Create(createQueueCommand.QueueName));
+        var command = new CreateQueueCommand(createQueueRequest.RequestType, 
+            QueueName.Create(createQueueRequest.QueueName));
         
         var result = await Sender.Send(command, cancellationToken);
         

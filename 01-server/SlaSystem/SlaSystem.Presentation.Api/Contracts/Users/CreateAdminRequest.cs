@@ -1,9 +1,4 @@
 ﻿
 namespace SlaSystem.Presentation.Api.Contracts.Users;
 
-public class CreateAdminRequest
-{
-    public string UserName { get; } = string.Empty;
-    public string Password { get; } = string.Empty;
-    public string Zone { get; set; } = string.Empty;
-}
+public sealed record CreateAdminRequest(string UserName, string Password, string Zone);
