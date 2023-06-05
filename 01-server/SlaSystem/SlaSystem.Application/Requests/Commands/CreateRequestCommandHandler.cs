@@ -11,7 +11,8 @@ public class CreateRequestCommandHandler : ICommandHandler<CreateRequestCommand,
     private readonly ISlaRepository _slaRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateRequestCommandHandler(IUnitOfWork unitOfWork, IRequestRepository requestRepository, ISlaRepository slaRepository)
+    public CreateRequestCommandHandler(IUnitOfWork unitOfWork, IRequestRepository requestRepository
+        , ISlaRepository slaRepository)
     {
         _unitOfWork = unitOfWork;
         _requestRepository = requestRepository;
