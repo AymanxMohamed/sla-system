@@ -6,7 +6,8 @@ namespace SlaSystem.Domain.Entities;
 
 public class User : Entity
 {
-    private User(Guid id, UserName username, Password password, Role role, Zone zone, Queue queue) : base(id)
+    private User(Guid id, UserName username, Password password, Zone zone, Queue queue, Role role) 
+        : base(id)
     {
         UserName = username;
         Password = password;
@@ -21,9 +22,9 @@ public class User : Entity
     public Zone Zone { get; set; }
     public Queue Queue { get; private set; }
 
-    public static User Create(UserName username, Password password, Role role, Zone zone, Queue queue)
+    public static User Create(UserName username, Password password, Zone zone, Queue queue, Role role = Role.User)
     {
-        var user = new User(new Guid(), username, password, role, zone, queue);
+        var user = new User(new Guid(), username, password, zone, queue, role);
         queue.AddUser(user);
         return user;
     }
