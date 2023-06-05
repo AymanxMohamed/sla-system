@@ -18,6 +18,7 @@ public class Request : Entity
         Description = description;
         Sla = sla;
         ClientId = clientId;
+        SlaId = sla.Id;
     }
 
     public RequestType RequestType { get; }
@@ -27,6 +28,7 @@ public class Request : Entity
     public User? Client { get; }
     public Guid ClientId { get;  }
     public Sla Sla { get; }
+    public Guid SlaId { get; }
 
     public DateTime CreatedAt { get; } = DateTime.Now;
     public RequestStatus RequestStatus { get; private set; } = RequestStatus.Active;

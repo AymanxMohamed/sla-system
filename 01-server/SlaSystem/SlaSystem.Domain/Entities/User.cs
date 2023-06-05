@@ -21,6 +21,10 @@ public class User : Entity
     public Role Role { get; private set; }
     public Zone Zone { get; set; }
     public Queue? Queue { get; private set; }
+    public Guid QueueId { get; set; }
+
+    public List<Request> MyCreatedRequests { get; } = new();
+    public List<Request> OwnedRequests { get; } = new();
 
     public static User Create(UserName username, Password password, Zone zone, Queue? queue, Role role = Role.User)
     {

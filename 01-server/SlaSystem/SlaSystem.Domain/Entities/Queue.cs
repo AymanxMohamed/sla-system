@@ -6,8 +6,6 @@ namespace SlaSystem.Domain.Entities;
 
 public class Queue : Entity
 {
-    private readonly List<User> _users = new();
-
     private Queue(Guid id,QueueName queueName, RequestType requestType) : base(id)
     {
         QueueName = queueName;
@@ -16,8 +14,9 @@ public class Queue : Entity
 
     public QueueName QueueName { get; }
     public RequestType RequestType { get; }
+    public List<User> Users { get; } = new();
 
-    internal void AddUser(User user) => _users.Add(user);
+    internal void AddUser(User user) => Users.Add(user);
     
     public static Queue Create(
         RequestType requestType,
@@ -25,5 +24,5 @@ public class Queue : Entity
     {
         return new Queue(Guid.NewGuid(), queueName, requestType);
     }
-    internal void RemoveUser(User user) => _users.Remove(user);
+    internal void RemoveUser(User user) => Users.Remove(user);
 }
