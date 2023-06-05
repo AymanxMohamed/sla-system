@@ -22,6 +22,7 @@ public class Request : Entity
 
     public RequestType RequestType { get; }
     public Description Description { get; private set; }
+    public Guid OwnerId { get; private set; }
     public User? Owner { get; private set; }
     public User Client { get; }
     public Sla Sla { get; }
@@ -41,7 +42,7 @@ public class Request : Entity
     public DateTime SlaExpiredOn { get; private set; }
     public DateTime ClosedAt { get; private set; }
 
-    public void Assign(User owner) => Owner = owner;
+    public void Assign(Guid ownerId) => OwnerId = ownerId;
 
 
     public void Close()
