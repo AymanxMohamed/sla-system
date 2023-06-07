@@ -12,7 +12,6 @@ import loginSchema from "../../../../services/yub/loginSchema";
 
 const LoginView: React.FC = (): JSX.Element => {
     const navigate = useNavigate();
-    console.log("inside login")
     const { login } = useAuthApi();
 
     const submitHandler = (values: any, { setSubmitting }: any) => {

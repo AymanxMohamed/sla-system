@@ -10,11 +10,12 @@ import LoginRequest from "../types/Api/ApiRequests/Auth/LoginRequest";
 const useAuthApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
-
-    const register = async (registerRequest: RegisterRequest): Promise<Result<User>> => {
+    const controllerName =  "Auth";
+    const register = async (payload: RegisterRequest): Promise<Result<User>> => {
 
         try {
-            const response = await axiosClient.post("/Auth/Register", registerRequest);
+            const response = await axiosClient.post(`/${controllerName}/Register`,
+                payload);
             return response.data as Result<User>;
         } catch (err: any) {
             if (err.message === "Network Error") {
@@ -24,9 +25,9 @@ const useAuthApi = () => {
         }
     };
 
-    const login = async (loginRequest: LoginRequest, checked: any) => {
+    const login = async (payload: LoginRequest, checked: any) => {
         try {
-            const response = await axiosClient.post("Auth/Login", loginRequest);
+            const response = await axiosClient.post(`${controllerName}/Login`, payload);
             if (checked.length) {
                 localStorage.setItem("userData", JSON.stringify(response.data.value));
             } else {

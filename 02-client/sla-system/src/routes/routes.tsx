@@ -32,8 +32,8 @@ const AppRoutes: React.FC = (): JSX.Element => {
                 </Route>
 
             </Route>
-            <Route path="/auth/login" element={<LoginView /> }/>
             <Route path="404" element={<PageNotFoundView /> }/>
+            <Route path="un-authorized" element={<PageNotFoundView /> }/>
             <Route
                 path="*"
                 element={ <Navigate to={"404"} state={{ from: location }} replace /> }

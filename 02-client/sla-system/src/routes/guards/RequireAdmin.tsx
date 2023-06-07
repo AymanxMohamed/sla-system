@@ -5,13 +5,12 @@ import {Role} from "../../services/types/Api/enums/Role";
 const RequireAdmin = () => {
     const {user} = useAuth();
     const location = useLocation();
-    console.log("called");
 
 
     return user && user.role === Role.Admin ? (
         <Outlet />
     ) : (
-        <Navigate to={"/auth"} state={{ from: location }} replace />
+        <Navigate to={"/un-authorized"} state={{ from: location }} replace />
     );
 }
 export default RequireAdmin;

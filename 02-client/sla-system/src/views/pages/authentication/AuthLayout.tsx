@@ -5,7 +5,6 @@ import useAuth from "../../../services/hooks/useAuthSlice";
 const AuthLayout: React.FC = (): JSX.Element => {
     const { user } = useAuth();
     const location = useLocation();
-    console.log("inside auth layout");
     return user ? (
         <Navigate to={"/"} state={{ from: location }} replace />
     ) : (

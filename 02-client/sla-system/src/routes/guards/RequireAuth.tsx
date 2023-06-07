@@ -4,7 +4,6 @@ import {Navigate, Outlet, useLocation} from "react-router-dom";
 const RequireAuth = () => {
     const {user} = useAuth();
     const location = useLocation();
-    console.log("called");
 
     return user ? (
         <Outlet />

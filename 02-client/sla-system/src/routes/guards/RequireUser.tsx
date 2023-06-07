@@ -5,13 +5,12 @@ import {Role} from "../../services/types/Api/enums/Role";
 const RequireUser = () => {
     const {user} = useAuth();
     const location = useLocation();
-    console.log("called");
 
 
     return user && user.role === Role.User ? (
         <Outlet />
     ) : (
-        <Navigate to={"/auth"} state={{ from: location }} replace />
+        <Navigate to={"/un-authorized"} state={{ from: location }} replace />
     );
 }
 export default RequireUser;

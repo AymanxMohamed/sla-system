@@ -6,7 +6,6 @@ import { Role } from '../../../services/types/Api/enums/Role';
 const HomePage: React.FC = (): JSX.Element => {
     const { user } = useAuth();
     const location = useLocation();
-    console.log(user);
     let navigateTo;
     if (user) {
         switch (user.role) {
