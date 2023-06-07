@@ -4,7 +4,7 @@ import SlaRow from "./SlaRow";
 
 const QueueTable: React.FC<{ slas: Sla[] }> = ({ slas }) => {
     return (
-        <table>
+        <table border={1}>
             <thead>
                 <tr>
                     <th>Request Type</th>

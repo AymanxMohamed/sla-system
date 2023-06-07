@@ -16,6 +16,7 @@ const useSlaApi = () => {
 
         try {
             const response: AxiosResponse<Result<Sla[]>> = await axiosClient.get(`/${controllerName}/GetSlas`);
+            console.log(response.data.value);
             dispatch(setSlas(response.data.value));
             return response.data.value;
         } catch (err: any) {

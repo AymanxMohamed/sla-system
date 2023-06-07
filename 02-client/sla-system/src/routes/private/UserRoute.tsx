@@ -3,7 +3,6 @@ import React from "react";
 import RequireUser from "../guards/RequireUser";
 import UserMyRequestsView from "../../views/pages/requests/views/UserMyRequestsView";
 import UserRequestsView from "../../views/pages/requests/views/UserRequestsView";
-import RequestClose from "../../views/pages/requests/components/RequestClose";
 import CloseRequestView from "../../views/pages/requests/views/CloseRequestView";
 
 export default function UserRoute() {

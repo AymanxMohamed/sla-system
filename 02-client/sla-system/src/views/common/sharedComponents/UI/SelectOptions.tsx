@@ -1,32 +1,29 @@
 import React from "react";
+import {ErrorMessage, Field} from "formik";
 
-const Button: React.FC<any> = ({ color, icon, text, ...rest }): JSX.Element => {
+const SelectOptions: React.FC<{  idName: string, elements: any[], nameProperty: string, changeHandler?: any, title: string,
+    keyProperty?: string }> =
+    ({ idName, elements, nameProperty, changeHandler, title, keyProperty = "id"}) => {
+    function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        const selectedValue = event.target.value;
+        if (changeHandler) {
+            changeHandler(idName, selectedValue);
+        }
+    }
     return (
-        <div className="flex flex-wrap -mx-3 mt-6">
-            <div className="w-full px-3">
-                <button
-                    className={
-                        "btn px-0 text-white bg-" +
-                        color +
-                        "-700 hover:bg-" +
-                        color +
-                        "-600 w-full relative flex items-center"
-                    }
-                    {...rest}
-                >
-                    {icon && (
-                        <i
-                            className={
-                                icon +
-                                " w-4 h-4 fill-current text-white opacity-75 flex-shrink-0 mx-4"
-                            }
-                        ></i>
-                    )}
-                    <span className="flex-auto pl-16 -ml-16 text-center">{text}</span>
-                </button>
-            </div>
+        <div>
+            <label htmlFor={idName}>{title}</label>
+            <Field as="select" name={idName} onChange={handleChange}>
+                <option value="">{title}</option>
+                {elements.map((element) => (
+                    <option key={element[keyProperty]} value={element[keyProperty]}>
+                        {element[nameProperty]}
+                    </option>
+                ))}
+            </Field>
+            <ErrorMessage name={idName} component="div" />
         </div>
     );
 };
 
-export default Button;
+export default SelectOptions;

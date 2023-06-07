@@ -1,11 +1,21 @@
 import { Navigate, useLocation, useRoutes } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import RequireClient from "../guards/RequireClient";
 import ClientRequestsView from "../../views/pages/requests/views/ClientRequestsView";
 import CreateRequestView from "../../views/pages/requests/views/CreateRequestView";
+import useRequestApi from "../../services/hooks/useRequestApi";
+import useAuth from "../../services/hooks/useAuthSlice";
 
 export default function ClientRoute() {
     const location = useLocation();
+
+    const requestsApi = useRequestApi();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        requestsApi.getClientRequests(user?.id).then();
+    }, []);
+
     return useRoutes([
         {
             path: "/",

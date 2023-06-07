@@ -2,17 +2,19 @@ import {useAppDispatch} from "../../app/hooks";
 
 import useAxios from "./useAxios";
 import Result from "../types/Api/ApiResponses/Result";
-import { AxiosResponse } from "axios";
+import {AxiosResponse} from "axios";
 import EmptyResult from "../types/Api/ApiResponses/EmptyResult"
-import {addRequest, setClientRequests, setUserRequests, updateRequest} from "../reducers/request";
+import {addRequest, setClientRequests, setTypeRequests, setUserRequests, updateRequest} from "../reducers/request";
 import Request from "../types/Api/Entities/Request";
 import CreateRequestPayload from "../types/Api/ApiRequests/Requests/CreateRequestPayload";
 import AssignRequestPayload from "../types/Api/ApiRequests/Requests/AssignRequestPayload";
+import useQueuesApi from "./useQueuesApi";
 
 const useRequestApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
     const controllerName =  "Request";
+    const queuesApi = useQueuesApi();
 
     const getClientRequests = async (clientId: string | undefined): Promise<Request[]> => {
 
@@ -44,7 +46,38 @@ const useRequestApi = () => {
         }
     };
 
-    const getRequest = async (requestId: string): Promise<Request> => {
+    const getRequestsByRequestType = async (requestType: string | undefined): Promise<Request[]> => {
+
+        try {
+            const response: AxiosResponse<Result<Request[]>> =
+                await axiosClient.get(`/${controllerName}/GetRequestsByRequestType/${requestType}`);
+            dispatch(setTypeRequests(response.data.value));
+            return response.data.value;
+        } catch (err: any) {
+            if (err.message === "Network Error") {
+                throw new Error("Server is Offline Now");
+            }
+            throw err.response.data;
+        }
+    };
+
+    const getRequestsForQueue = async (queueId: string | undefined): Promise<Request[]> => {
+
+        try {
+            const queues = await queuesApi.getQueues();
+            const requestType = queues.find(queue => queue.id === queueId)?.requestType;
+            return await getRequestsByRequestType(requestType);
+        } catch (err: any) {
+            if (err.message === "Network Error") {
+                throw new Error("Server is Offline Now");
+            }
+            throw err.response.data;
+        }
+    };
+
+
+
+    const getRequest = async (requestId: string | undefined): Promise<Request> => {
 
         try {
             const response: AxiosResponse<Result<Request>> =
@@ -72,7 +105,7 @@ const useRequestApi = () => {
         }
     };
 
-    const closeRequest = async (requestId: string): Promise<Request | null> => {
+    const closeRequest = async (requestId: string | undefined): Promise<Request | null> => {
         try {
             const response: AxiosResponse<EmptyResult> =
                 await axiosClient.patch(`${controllerName}/CloseRequest/${requestId}`);
@@ -114,7 +147,9 @@ const useRequestApi = () => {
         getRequest,
         createRequest,
         closeRequest,
-        assignRequest
+        assignRequest,
+        getRequestsByRequestType,
+        getRequestsForQueue
     };
 };
 

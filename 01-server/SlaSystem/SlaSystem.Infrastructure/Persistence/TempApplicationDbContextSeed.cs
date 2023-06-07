@@ -21,7 +21,7 @@ public static class TempApplicationDbContextSeed
         {
             Sla.Slas.AddRange(new []
             {
-                Sla.Create(RequestType.Invoice, Severity.High, 2),
+                Sla.Create(RequestType.Invoice, Severity.High, 0.02),
                 Sla.Create(RequestType.Payment, Severity.Medium, 4)
             });
         }

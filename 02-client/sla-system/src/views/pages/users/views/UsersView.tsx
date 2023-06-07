@@ -1,26 +1,24 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import {useAppDispatch} from "../../../../app/hooks";
 import UsersTable from "../components/UsersTable";
 import useUserApi from "../../../../services/hooks/useUserApi";
-import {setUsers} from "../../../../services/reducers/user";
 import User from "../../../../services/types/Api/Entities/User";
+import useUserSlice from "../../../../services/hooks/useUserSlice";
 
 const UsersView: React.FC = () => {
     const [users, setStateUsers] = useState<User[]>([]);
     const usersApi = useUserApi();
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        usersApi.getUsers().then(queues => {
-            setStateUsers(users);
-            dispatch(setUsers(users));
-        })
-    }, [usersApi, dispatch, users]);
+        usersApi.getUsers().then(usersArr => {
+            setStateUsers(usersArr);
+        });
+    }, []);
+
 
     return (
       <>
-          <NavLink to={"/admin/slas/create"}>Create Sla</NavLink>
+          <NavLink to={"/admin/users/create"}>Create Users</NavLink>
           <UsersTable users={users} />
       </>
     );

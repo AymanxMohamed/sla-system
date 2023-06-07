@@ -9,10 +9,10 @@ const QueuesView: React.FC = () => {
     const queuesApi = useQueuesApi();
 
     useEffect(() => {
-        queuesApi.getQueues().then(queues => {
-            setQueues(queues);
+        queuesApi.getQueues().then(queuesArr => {
+            setQueues(queuesArr);
         })
-    }, [queuesApi]);
+    }, []);
 
     return (
       <>

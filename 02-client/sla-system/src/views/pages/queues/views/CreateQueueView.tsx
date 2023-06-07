@@ -1,29 +1,42 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Formik, Form } from "formik";
 import Button from "../../../common/sharedComponents/UI/Button";
-import { Link, useNavigate } from "react-router-dom";
-import useAuthApi from "../../../../services/hooks/useAuthApi";
-import { toast } from "react-toastify";
-import RegisterSchema from "../../../../services/yub/RegisterSchema";
+import { useNavigate } from "react-router-dom";
 import Input from "../../authentication/components/Input";
+import CreateUserSchema from "../../../../services/yub/createUserSchema";
+import Queue from "../../../../services/types/Api/Entities/Queue";
+import useQueuesApi from "../../../../services/hooks/useQueuesApi";
+import SelectOptions from "../../../common/sharedComponents/UI/SelectOptions";
+import useUserApi from "../../../../services/hooks/useUserApi";
+import CreateUserRequest from "../../../../services/types/Api/ApiRequests/Users/CreateUserRequest";
+import createQueueRequestSchema from "../../../../services/yub/createQueueSchema";
+import {RequestType} from "../../../../services/types/Api/enums/RequestType";
+import CreateQueueRequest from "../../../../services/types/Api/ApiRequests/Queues/CreateQueueRequest";
+import {enumToArray} from "../../../../services/utils/appUtils";
 
 const CreateQueueView: React.FC = (): JSX.Element => {
-    const { register } = useAuthApi();
+    const { createQueue } = useQueuesApi();
     const navigate = useNavigate();
 
+    const handleChange = (formik: any, field: any, value: number) => {
+        console.log(enumToArray(RequestType))
+        console.log(value);
+        formik.setFieldValue(field, value);
+    };
+
     const submitHandler = async (values: any, { setSubmitting }: any) => {
+        console.log(values);
+        let queue: CreateQueueRequest = {
+            QueueName: values.QueueName,
+            RequestType: +values.RequestType
+        };
         try {
             // await register(values);
-            toast.promise(register(values), {
-                pending: "Creating Account in prosess",
-                success: "Account Created Successfully",
-                error: "Error ocuured",
+            createQueue(queue).then(user => {
             });
-            navigate("/auth/login");
+            navigate("/auth/queues");
         } catch (err: any) {
-            for (let key in err) {
-                toast.error(err[key][0]);
-            }
+
         }
         setSubmitting(false);
     };
@@ -35,81 +48,47 @@ const CreateQueueView: React.FC = (): JSX.Element => {
                         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
                             {/* Page header */}
                             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-                                <h1 className="h1">Sign Up!.</h1>
+                                <h1 className="h1">Create New User.</h1>
                             </div>
 
                             {/* Form */}
                             <div className="max-w-sm mx-auto">
                                 <Formik
                                     initialValues={{
-                                        username: "",
-                                        password: "",
-                                        confirmPassword: "",
-                                        zone: "",
+                                        RequestType: "",
+                                        QueueName: "",
                                     }}
-                                    validationSchema={RegisterSchema}
+                                    validationSchema={createQueueRequestSchema}
                                     onSubmit={submitHandler}
                                 >
                                     {(formik) => (
+
                                         <>
                                             <Form>
                                                 <Input
                                                     type={"text"}
-                                                    id={"username"}
-                                                    placeholder={"Enter Your first name"}
-                                                    name={"username"}
-                                                    label={"User Name"}
+                                                    id={"QueueName"}
+                                                    placeholder={"Enter Queue Name"}
+                                                    name={"QueueName"}
+                                                    label={"Queue Name"}
                                                 />
-                                                <Input
-                                                    id={"pas"}
-                                                    type={"password"}
-                                                    placeholder={"Enter Your Password"}
-                                                    name={"password"}
-                                                    label={"Password"}
-                                                />
-                                                <Input
-                                                    id={"pas_conf"}
-                                                    type={"password"}
-                                                    placeholder={"Enter Your Password Confirmation"}
-                                                    name={"confirmPassword"}
-                                                    label={"Confirm Password"}
-                                                />
-                                                <Input
-                                                    id={"zone"}
-                                                    type={"text"}
-                                                    name={"zone"}
-                                                    placeholder={"Enter Your Zone"}
-                                                    label={"Zone"}
-                                                />
+
+                                                <SelectOptions idName={"RequestType"}
+                                                               elements={enumToArray(RequestType)}
+                                                               nameProperty={"name"}
+                                                               keyProperty={"id"}
+                                                               title={"Select Request Type"}
+                                                               changeHandler={handleChange.bind(null, formik)}/>
                                                 <Button
-                                                    text={"Sign up"}
+                                                    text={"Create"}
                                                     color={"blue"}
                                                     type={"submit"}
                                                 />
+
                                             </Form>
                                         </>
                                     )}
                                 </Formik>
-                                <div className="text-sm text-gray-500 text-center mt-3">
-                                    By creating an account, you agree to the{" "}
-                                    <a className="underline" href="#0">
-                                        terms & conditions
-                                    </a>
-                                    , and our{" "}
-                                    <a className="underline" href="#0">
-                                        privacy policy
-                                    </a>
-                                    .
-                                </div>
-                                <div className="text-gray-600 text-center mt-6">
-                                    Already a Member?
-                                    <Link
-                                        to="/auth/login"
-                                        className="text-blue-600 hover:underline transition duration-150 ease-in-out"
-                                    >
-                                        Sign in
-                                    </Link>
-                                </div>
                             </div>
                         </div>
                     </div>

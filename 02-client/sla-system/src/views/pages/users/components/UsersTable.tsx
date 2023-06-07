@@ -4,7 +4,7 @@ import UserRow from "./UserRow";
 
 const UserTable: React.FC<{ users: User[] }> = ({ users }) => {
     return (
-        <table>
+        <table border={1}>
             <thead>
                 <tr>
                     <th>User Name</th>

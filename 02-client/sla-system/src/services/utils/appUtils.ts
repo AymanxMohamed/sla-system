@@ -16,9 +16,16 @@ export const formatDate = (date: Date) => {
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
+        // minute: 'numeric',
+        // second: 'numeric',
         hour12: false,
     };
     return date?.toLocaleString(undefined, options);
+}
+
+
+export function enumToArray(enumObj: any): { id: number; name: string }[] {
+    return Object.keys(enumObj)
+        .filter((key) => isNaN(Number(key)))
+        .map((key) => ({ id: enumObj[key], name: key }));
 }

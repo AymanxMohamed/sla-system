@@ -1,13 +1,10 @@
-import { mixed, object, string } from "yup";
-import {RequestType} from "../types/Api/enums/RequestType";
+import { number, object, string} from "yup";
 
 let CreateRequestSchema = object({
-    RequestType: mixed<RequestType>()
-        .oneOf(Object.values(RequestType) as RequestType[])
+    RequestType: number()
         .required("Request Type is Required"),
     Description: string()
-        .required("Description is Required"),
-    ClientId: string().required("Duration is required"),
+        .required("Description is Required")
 });
 
 export default CreateRequestSchema;

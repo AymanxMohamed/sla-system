@@ -1,9 +1,7 @@
-import {mixed, object, string } from "yup";
-import {RequestType} from "../types/Api/enums/RequestType";
+import { number, object, string} from "yup";
 
 let createQueueRequestSchema = object({
-    RequestType: mixed<RequestType>()
-        .oneOf(Object.values(RequestType) as RequestType[])
+    RequestType: number()
         .required("Request Type is Required"),
     QueueName: string().required("Queue Name is Required"),
 });

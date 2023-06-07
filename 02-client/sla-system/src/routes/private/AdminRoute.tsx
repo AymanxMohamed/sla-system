@@ -6,10 +6,10 @@ import SlasView from "../../views/pages/slas/views/SlasView";
 import UsersView from "../../views/pages/users/views/UsersView";
 import CreateUserView from "../../views/pages/users/views/CreateUserView";
 import CreateQueueView from "../../views/pages/queues/views/CreateQueueView";
-import CreateSlaView from "../../views/pages/slas/views/CreateSlaView";
 
 export default function AdminRoute() {
     const location = useLocation();
+
     return useRoutes([
         {
             path: "/",
@@ -24,7 +24,6 @@ export default function AdminRoute() {
                 { path: "queues", element: <QueuesView /> },
                 { path: "queues/create", element: <CreateQueueView /> },
                 { path: "slas", element: <SlasView /> },
-                { path: "slas/create", element: <CreateSlaView /> },
                 { path: "*", element: <Navigate to={"/404"} /> },
             ],
         },

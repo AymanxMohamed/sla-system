@@ -5,8 +5,7 @@ import AppRoutes from "./routes/routes";
 function App() {
   return (
       <>
-        <div className="btn btn-primary">Test</div>
-      <AppRoutes />
+         <AppRoutes />
       </>
   );
 }

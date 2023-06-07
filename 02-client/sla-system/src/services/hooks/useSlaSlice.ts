@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../app/hooks";
 
-const useRequestSlice = () => {
-    return useAppSelector(selector => selector.request);
+const useSlaSlice = () => {
+    return useAppSelector(selector => selector.sla);
 }
 
-export default  useRequestSlice;
+export default  useSlaSlice;

@@ -1,29 +1,16 @@
-import React, { useEffect, useState} from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import useRequestApi from "../../../../services/hooks/useRequestApi";
-import Request from "../../../../services/types/Api/Entities/Request";
-import useAuth from "../../../../services/hooks/useAuthSlice";
-import RequestTable from "../components/RequestTable";
-import {useAppDispatch} from "../../../../app/hooks";
-import {setClientRequests} from "../../../../services/reducers/request";
+
+import ClientRequestTable from "../components/ClientRequestTable";
+import useRequestSlice from "../../../../services/hooks/useRequestSlice";
 
 const ClientRequestsView: React.FC = () => {
-    const [requests, setRequests] = useState<Request[]>([]);
-    const requestsApi = useRequestApi();
-    const { user } = useAuth();
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        requestsApi.getClientRequests(user?.id).then(requests => {
-            setRequests(requests);
-            dispatch(setClientRequests(requests));
-        })
-    }, [requestsApi, user, dispatch]);
+    const { ClientRequests } = useRequestSlice();
 
     return (
         <>
             <NavLink to={"/client/requests/create"}>Create Request</NavLink>
-            <RequestTable requests={requests} />
+            <ClientRequestTable requests={ClientRequests} />
         </>
     );
 };

@@ -1,29 +1,53 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Formik, Form } from "formik";
 import Button from "../../../common/sharedComponents/UI/Button";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthApi from "../../../../services/hooks/useAuthApi";
 import { toast } from "react-toastify";
-import RegisterSchema from "../../../../services/yub/RegisterSchema";
 import Input from "../../authentication/components/Input";
+import CreateUserSchema from "../../../../services/yub/createUserSchema";
+import Queue from "../../../../services/types/Api/Entities/Queue";
+import useQueuesApi from "../../../../services/hooks/useQueuesApi";
+import SelectOptions from "../../../common/sharedComponents/UI/SelectOptions";
+import useUserApi from "../../../../services/hooks/useUserApi";
+import CreateUserRequest from "../../../../services/types/Api/ApiRequests/Users/CreateUserRequest";
 
 const CreateUserView: React.FC = (): JSX.Element => {
-    const { register } = useAuthApi();
+    const { createUser } = useUserApi();
     const navigate = useNavigate();
 
+    const [queues, setQueues] = useState<Queue[]>([]);
+    const queuesApi = useQueuesApi();
+
+    useEffect(() => {
+        queuesApi.getQueues().then(queuesArr => {
+            setQueues(queuesArr);
+        })
+    }, []);
+
+    const handleChange = (formik: any, field: any, value: any) => {
+        console.log(formik);
+        console.log(field);
+        console.log(value);
+
+        formik.setFieldValue(field, value);
+    };
+
     const submitHandler = async (values: any, { setSubmitting }: any) => {
+        console.log(values);
+        let user: CreateUserRequest = {
+            UserName: values.username,
+            Password: values.password,
+            Zone: values.zone,
+            QueueId: values.queueId
+        };
         try {
             // await register(values);
-            toast.promise(register(values), {
-                pending: "Creating Account in prosess",
-                success: "Account Created Successfully",
-                error: "Error ocuured",
+            createUser(user).then(user => {
             });
-            navigate("/auth/login");
+            navigate("/auth/users");
         } catch (err: any) {
-            for (let key in err) {
-                toast.error(err[key][0]);
-            }
+
         }
         setSubmitting(false);
     };
@@ -35,7 +59,7 @@ const CreateUserView: React.FC = (): JSX.Element => {
                         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
                             {/* Page header */}
                             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-                                <h1 className="h1">Sign Up!.</h1>
+                                <h1 className="h1">Create New User.</h1>
                             </div>
 
                             {/* Form */}
@@ -46,11 +70,13 @@ const CreateUserView: React.FC = (): JSX.Element => {
                                         password: "",
                                         confirmPassword: "",
                                         zone: "",
+                                        queueId: ""
                                     }}
-                                    validationSchema={RegisterSchema}
+                                    validationSchema={CreateUserSchema}
                                     onSubmit={submitHandler}
                                 >
                                     {(formik) => (
+
                                         <>
                                             <Form>
                                                 <Input
@@ -81,35 +107,22 @@ const CreateUserView: React.FC = (): JSX.Element => {
                                                     placeholder={"Enter Your Zone"}
                                                     label={"Zone"}
                                                 />
+
+                                                <SelectOptions idName={"queueId"}
+                                                               elements={queues}
+                                                               nameProperty={"queueName"}
+                                                               title={"Select User Queue"}
+                                                changeHandler={handleChange.bind(null, formik)}/>
                                                 <Button
-                                                    text={"Sign up"}
+                                                    text={"Create"}
                                                     color={"blue"}
                                                     type={"submit"}
                                                 />
+
                                             </Form>
                                         </>
                                     )}
                                 </Formik>
-                                <div className="text-sm text-gray-500 text-center mt-3">
-                                    By creating an account, you agree to the{" "}
-                                    <a className="underline" href="#0">
-                                        terms & conditions
-                                    </a>
-                                    , and our{" "}
-                                    <a className="underline" href="#0">
-                                        privacy policy
-                                    </a>
-                                    .
-                                </div>
-                                <div className="text-gray-600 text-center mt-6">
-                                    Already a Member?
-                                    <Link
-                                        to="/auth/login"
-                                        className="text-blue-600 hover:underline transition duration-150 ease-in-out"
-                                    >
-                                        Sign in
-                                    </Link>
-                                </div>
                             </div>
                         </div>
                     </div>

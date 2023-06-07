@@ -4,7 +4,7 @@ import QueueRow from "./QueueRow";
 
 const QueueTable: React.FC<{ queues: Queue[] }> = ({ queues }) => {
     return (
-        <table>
+        <table border={1}>
             <thead>
                 <tr>
                     <th>Queue name</th>
