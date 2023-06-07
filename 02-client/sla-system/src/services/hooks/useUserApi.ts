@@ -8,7 +8,7 @@ import User from "../types/Api/Entities/User";
 import {adduser, setUsers} from "../reducers/user";
 import CreateUserRequest from "../types/Api/ApiRequests/Users/CreateUserRequest";
 
-const useAuthApi = () => {
+const useUserApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
     const controllerName =  "User";
@@ -47,4 +47,4 @@ const useAuthApi = () => {
     };
 };
 
-export default useAuthApi;
+export default useUserApi;

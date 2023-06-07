@@ -9,12 +9,12 @@ import Request from "../types/Api/Entities/Request";
 import CreateRequestPayload from "../types/Api/ApiRequests/Requests/CreateRequestPayload";
 import AssignRequestPayload from "../types/Api/ApiRequests/Requests/AssignRequestPayload";
 
-const useAuthApi = () => {
+const useRequestApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
     const controllerName =  "Request";
 
-    const getClientRequests = async (clientId: string): Promise<Request[]> => {
+    const getClientRequests = async (clientId: string | undefined): Promise<Request[]> => {
 
         try {
             const response: AxiosResponse<Result<Request[]>> =
@@ -29,7 +29,7 @@ const useAuthApi = () => {
         }
     };
 
-    const getUserRequests = async (userId: string): Promise<Request[]> => {
+    const getUserRequests = async (userId: string | undefined): Promise<Request[]> => {
 
         try {
             const response: AxiosResponse<Result<Request[]>> =
@@ -118,4 +118,4 @@ const useAuthApi = () => {
     };
 };
 
-export default useAuthApi;
+export default useRequestApi;

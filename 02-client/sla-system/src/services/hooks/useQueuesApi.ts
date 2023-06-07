@@ -7,7 +7,7 @@ import Queue from "../types/Api/Entities/Queue";
 import {addQueue, setQueues} from "../reducers/queue";
 import {AxiosResponse} from "axios";
 
-const useAuthApi = () => {
+const useQueueApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
     const controllerName =  "Queue";
@@ -45,4 +45,4 @@ const useAuthApi = () => {
     };
 };
 
-export default useAuthApi;
+export default useQueueApi;

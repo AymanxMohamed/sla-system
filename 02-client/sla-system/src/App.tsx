@@ -3,7 +3,12 @@ import './App.css';
 import AppRoutes from "./routes/routes";
 
 function App() {
-  return <AppRoutes />;
+  return (
+      <>
+        <div className="btn btn-primary">Test</div>
+      <AppRoutes />
+      </>
+  );
 }
 
 export default App;

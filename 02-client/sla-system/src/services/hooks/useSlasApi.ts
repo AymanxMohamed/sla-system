@@ -2,15 +2,12 @@ import {useAppDispatch} from "../../app/hooks";
 
 import useAxios from "./useAxios";
 import Result from "../types/Api/ApiResponses/Result";
-import CreateQueueRequest from "../types/Api/ApiRequests/Queues/CreateQueueRequest";
-import Queue from "../types/Api/Entities/Queue";
-import {addQueue, setQueues} from "../reducers/queue";
 import Sla from "../types/Api/Entities/Sla";
 import CreateSlaRequest from "../types/Api/ApiRequests/Slas/CreateSlaRequest";
 import { AxiosResponse } from "axios";
 import {addSla, setSlas} from "../reducers/sla";
 
-const useAuthApi = () => {
+const useSlaApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
     const controllerName =  "SLA";
@@ -48,4 +45,4 @@ const useAuthApi = () => {
     };
 };
 
-export default useAuthApi;
+export default useSlaApi;

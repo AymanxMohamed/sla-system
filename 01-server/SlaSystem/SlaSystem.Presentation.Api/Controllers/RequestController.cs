@@ -73,6 +73,24 @@ public class RequestController : ApiController
         return Ok(Result.Success(requestDtos));
     }
     
+    [HttpGet("GetRequestsByRequestType/{requestType}", Name = "GetRequestsByRequestType")]
+    [ProducesResponseType(typeof(Result<List<Request>>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<Result<List<Request>>>> GetRequestsByRequestType(RequestType requestType, 
+        CancellationToken cancellationToken)
+    {
+        var query = new GetRequestsByRequestTypeQuery(requestType); 
+        
+        var result = await Sender.Send(query, cancellationToken);
+
+        if (result.IsFailure)
+            return BadRequest(result.Error);
+        
+        var requestDtos = result.Value.Select(AutoMapper.MapRequest);
+
+        return Ok(Result.Success(requestDtos));
+    }
+    
     [HttpGet("GetRequest/{id}", Name = "GetRequest")]
     [ProducesResponseType(typeof(Result<Request>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]

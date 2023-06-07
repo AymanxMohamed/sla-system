@@ -2,11 +2,12 @@ import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import PageNotFoundView from "../views/pages/errors/views/PageNotFoundView";
 import MainLayout from "../views/common/layouts/MainLayout";
 import RequireAuth from "./guards/RequireAuth";
-import RequireAdmin from "./guards/RequireAdmin";
-import RequireUser from "./guards/RequireUser";
 import AuthRoute from "./public/AuthRoute";
-import LoginView from "../views/pages/authentication/views/LoginView";
 import HomePage from "../views/pages/home";
+import ClientRoute from "./private/ClientRoute";
+import AdminRoute from "./private/AdminRoute";
+import UserRoute from "./private/UserRoute";
+import React from "react";
 
 
 const AppRoutes: React.FC = (): JSX.Element => {
@@ -19,18 +20,10 @@ const AppRoutes: React.FC = (): JSX.Element => {
                 <Route path="auth/*" element={<AuthRoute />} />
                 {/* Protected Routes */}
                 <Route element={<RequireAuth />}>
-
-                    {/* Client Routes */}
-
-                    <Route element={<RequireAdmin />}>
-                        {/*  Admin Routes  */}
-                    </Route>
-
-                    <Route element={<RequireUser />}>
-                        {/*  User Routes  */}
-                    </Route>
+                    <Route path="client/*" element={<ClientRoute />} />
+                    <Route path="admin/*" element={<AdminRoute />} />
+                    <Route path="user/*" element={<UserRoute />} />
                 </Route>
-
             </Route>
             <Route path="404" element={<PageNotFoundView /> }/>
             <Route path="un-authorized" element={<PageNotFoundView /> }/>

@@ -7,6 +7,7 @@ const requestSlice = createSlice({
     initialState: {
         ClientRequests: [],
         UserRequests: [],
+        TypeRequests: []
     } as RequestState,
     reducers: {
         setClientRequests(state, action: PayloadAction<Request[]>) {
@@ -14,6 +15,9 @@ const requestSlice = createSlice({
         },
         setUserRequests(state, action: PayloadAction<Request[]>) {
             state.UserRequests = action.payload;
+        },
+        setTypeRequests(state, action: PayloadAction<Request[]>) {
+            state.TypeRequests = action.payload;
         },
         addRequest(state, action: PayloadAction<Request>) {
             state.ClientRequests.push(action.payload);
@@ -25,8 +29,13 @@ const requestSlice = createSlice({
                 clientRequest = action.payload;
             let userRequest =
                 state.UserRequests.find(req => req.id === action.payload.id) as Request;
+
             if (userRequest)
                 userRequest = action.payload;
+            let typeRequests =
+                state.TypeRequests.find(req => req.id === action.payload.id) as Request;
+            if (typeRequests)
+                typeRequests = action.payload;
         }
     },
 });
@@ -35,6 +44,8 @@ export const {
     setClientRequests,
     setUserRequests,
     addRequest,
-    updateRequest  } = requestSlice.actions;
+    updateRequest ,
+    setTypeRequests
+} = requestSlice.actions;
 export default requestSlice.reducer;
 
