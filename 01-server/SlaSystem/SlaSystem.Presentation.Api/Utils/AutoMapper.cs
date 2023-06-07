@@ -12,7 +12,7 @@ public static class AutoMapper
             user.Id.ToString(),
             user.UserName,
             user.Password,
-            user.Role.ToString(),
+            user.Role,
             user.Zone,
             user.QueueId.ToString()!);
     }
@@ -24,7 +24,7 @@ public static class AutoMapper
         return  new QueueDto(
             queue.Id.ToString(),
             queue.QueueName,
-            queue.RequestType.ToString(),
+            queue.RequestType,
             usersDtos);
     }
 
@@ -32,8 +32,8 @@ public static class AutoMapper
     {
         return new SlaDto(
             sla.Id.ToString(),
-            sla.RequestType.ToString(),
-            sla.Severity.ToString(),
+            sla.RequestType,
+            sla.Severity,
             sla.DurationInHours);
     }
     //
@@ -49,7 +49,7 @@ public static class AutoMapper
 
         return new RequestDto(
             request.Id.ToString(),
-            request.RequestType.ToString(),
+            request.RequestType,
             request.Description,
             request.OwnerId.ToString(),
             ownerDto,
@@ -58,8 +58,8 @@ public static class AutoMapper
             request.SlaId.ToString(),
             slaDto,
             request.CreatedAt,
-            request.RequestStatus.ToString(),
-            request.SlaStatus.ToString(),
+            request.RequestStatus,
+            request.SlaStatus,
             request.SlaExpiredOn,
             request.ClosedAt    
             );

@@ -4,6 +4,6 @@ public sealed record UserDto(
     string Id,
     string UserName,
     string Password,
-    string Role,
+    Role Role,
     string Zone,
     string QueueId);
