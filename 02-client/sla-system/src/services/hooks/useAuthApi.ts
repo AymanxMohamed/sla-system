@@ -25,7 +25,7 @@ const useAuthApi = () => {
         }
     };
 
-    const login = async (payload: LoginRequest, checked: any) => {
+    const login = async (payload: LoginRequest, checked: []) => {
         try {
             const response = await axiosClient.post(`${controllerName}/Login`, payload);
             if (checked.length) {

@@ -7,10 +7,13 @@ const slaSlice = createSlice({
     reducers: {
         setSlas(state, action: PayloadAction<Sla[]>) {
             state = action.payload;
+        },
+        addSla(state, action: PayloadAction<Sla>) {
+            state.push(action.payload);
         }
     },
 });
 
-export const { setSlas } = slaSlice.actions;
+export const { setSlas, addSla } = slaSlice.actions;
 export default slaSlice.reducer;
 

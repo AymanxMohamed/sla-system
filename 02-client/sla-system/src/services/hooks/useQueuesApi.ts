@@ -1,21 +1,23 @@
 import {useAppDispatch} from "../../app/hooks";
 
 import useAxios from "./useAxios";
-import {setUser} from "../reducers/auth";
 import Result from "../types/Api/ApiResponses/Result";
 import CreateQueueRequest from "../types/Api/ApiRequests/Queues/CreateQueueRequest";
 import Queue from "../types/Api/Entities/Queue";
+import {addQueue, setQueues} from "../reducers/queue";
 
 const useAuthApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
     const controllerName =  "Queue";
 
-    const getQueues = async (): Promise<Result<Queue[]>> => {
+    const getQueues = async (): Promise<Queue[]> => {
 
         try {
             const response = await axiosClient.get(`/${controllerName}/GetQueues`);
-            return response.data as Result<Queue[]>;
+            let result = response.data as Result<Queue[]>;
+            dispatch(setQueues(result.value));
+            return result.value;
         } catch (err: any) {
             if (err.message === "Network Error") {
                 throw new Error("Server is Offline Now");
@@ -24,12 +26,12 @@ const useAuthApi = () => {
         }
     };
 
-    const createQueue = async (payload: CreateQueueRequest, checked: any) => {
+    const createQueue = async (payload: CreateQueueRequest) => {
         try {
             const response = await axiosClient.post(`${controllerName}/CreateQueue`,
                 payload);
 
-            dispatch(set(response.data.value));
+            dispatch(addQueue(response.data.value));
         } catch (err: any) {
             if (err.message === "Network Error") {
                 throw new Error("Server is Offline Now");

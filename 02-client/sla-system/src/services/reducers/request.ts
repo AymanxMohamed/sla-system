@@ -14,10 +14,13 @@ const requestSlice = createSlice({
         },
         setUserRequests(state, action: PayloadAction<Request[]>) {
             state.UserRequests = action.payload;
-        }
+        },
+        addRequest(state, action: PayloadAction<Request>) {
+            state.ClientRequests.push(action.payload);
+        },
     },
 });
 
-export const { setClientRequests, setUserRequests  } = requestSlice.actions;
+export const { setClientRequests, setUserRequests, addRequest  } = requestSlice.actions;
 export default requestSlice.reducer;
 
