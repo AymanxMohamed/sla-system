@@ -1,24 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import User from "../types/User";
+import User from "../types/Api/Entities/User";
+import {getInitialState, removeStorageUserData} from "../utils/authUtils";
+import AuthState from "../types/AppStates/AuthState";
 
 const authSlice = createSlice({
     name: "auth",
-    initialState: {},
+    initialState: getInitialState() as AuthState,
     reducers: {
-        setTokens(
-            state,
-            action: PayloadAction<{ access: string; refresh: string }>
-        ) {
-        },
         setUser(state, action: PayloadAction<User>) {
-
+            state.user = action.payload;
         },
         logout(state) {
-
+            state.user = undefined;
+            removeStorageUserData();
         }
     },
 });
 
-export const { setUser, setTokens, logout } = authSlice.actions;
+export const { setUser, logout } = authSlice.actions;
 export default authSlice.reducer;
 

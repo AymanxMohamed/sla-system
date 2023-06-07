@@ -3,3 +3,4 @@ export default interface RegisterRequest {
     Password: string;
     Zone: string;
 }
+
