@@ -2,21 +2,23 @@ import {useAppDispatch} from "../../app/hooks";
 
 import useAxios from "./useAxios";
 import Result from "../types/Api/ApiResponses/Result";
-import CreateQueueRequest from "../types/Api/ApiRequests/Queues/CreateQueueRequest";
-import Queue from "../types/Api/Entities/Queue";
-import {addQueue, setQueues} from "../reducers/queue";
-import {AxiosResponse} from "axios";
+import { AxiosResponse } from "axios";
+import {Role} from "../types/Api/enums/Role";
+import User from "../types/Api/Entities/User";
+import {adduser, setUsers} from "../reducers/user";
+import CreateUserRequest from "../types/Api/ApiRequests/Users/CreateUserRequest";
 
 const useAuthApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
-    const controllerName =  "Queue";
+    const controllerName =  "User";
 
-    const getQueues = async (): Promise<Queue[]> => {
+    const getUsers = async (): Promise<User[]> => {
 
         try {
-            const response: AxiosResponse<Result<Queue[]>> = await axiosClient.get(`/${controllerName}/GetQueues`);
-            dispatch(setQueues(response.data.value));
+            const response: AxiosResponse<Result<User[]>> =
+                await axiosClient.get(`/${controllerName}/GetUsers/${Role.User}`);
+            dispatch(setUsers(response.data.value));
             return response.data.value;
         } catch (err: any) {
             if (err.message === "Network Error") {
@@ -26,11 +28,11 @@ const useAuthApi = () => {
         }
     };
 
-    const createQueue = async (payload: CreateQueueRequest) : Promise<Queue> => {
+    const createUser = async (payload: CreateUserRequest): Promise<User> => {
         try {
-            const response: AxiosResponse<Result<Queue>> = await axiosClient.post(`${controllerName}/CreateQueue`,
+            const response: AxiosResponse<Result<User>> = await axiosClient.post(`${controllerName}/CreateUser`,
                 payload);
-            dispatch(addQueue(response.data.value));
+            dispatch(adduser(response.data.value));
             return response.data.value;
         } catch (err: any) {
             if (err.message === "Network Error") {
@@ -40,8 +42,8 @@ const useAuthApi = () => {
         }
     };
     return {
-        getQueues,
-        createQueue,
+        getUsers,
+        createUser,
     };
 };
 

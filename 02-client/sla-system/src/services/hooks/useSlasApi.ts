@@ -5,18 +5,21 @@ import Result from "../types/Api/ApiResponses/Result";
 import CreateQueueRequest from "../types/Api/ApiRequests/Queues/CreateQueueRequest";
 import Queue from "../types/Api/Entities/Queue";
 import {addQueue, setQueues} from "../reducers/queue";
-import {AxiosResponse} from "axios";
+import Sla from "../types/Api/Entities/Sla";
+import CreateSlaRequest from "../types/Api/ApiRequests/Slas/CreateSlaRequest";
+import { AxiosResponse } from "axios";
+import {addSla, setSlas} from "../reducers/sla";
 
 const useAuthApi = () => {
     const dispatch = useAppDispatch();
     const axiosClient = useAxios();
-    const controllerName =  "Queue";
+    const controllerName =  "SLA";
 
-    const getQueues = async (): Promise<Queue[]> => {
+    const getSlas = async (): Promise<Sla[]> => {
 
         try {
-            const response: AxiosResponse<Result<Queue[]>> = await axiosClient.get(`/${controllerName}/GetQueues`);
-            dispatch(setQueues(response.data.value));
+            const response: AxiosResponse<Result<Sla[]>> = await axiosClient.get(`/${controllerName}/GetSlas`);
+            dispatch(setSlas(response.data.value));
             return response.data.value;
         } catch (err: any) {
             if (err.message === "Network Error") {
@@ -26,11 +29,11 @@ const useAuthApi = () => {
         }
     };
 
-    const createQueue = async (payload: CreateQueueRequest) : Promise<Queue> => {
+    const createSla = async (payload: CreateSlaRequest): Promise<Sla> => {
         try {
-            const response: AxiosResponse<Result<Queue>> = await axiosClient.post(`${controllerName}/CreateQueue`,
+            const response: AxiosResponse<Result<Sla>> = await axiosClient.post(`${controllerName}/CreateSla`,
                 payload);
-            dispatch(addQueue(response.data.value));
+            dispatch(addSla(response.data.value));
             return response.data.value;
         } catch (err: any) {
             if (err.message === "Network Error") {
@@ -40,8 +43,8 @@ const useAuthApi = () => {
         }
     };
     return {
-        getQueues,
-        createQueue,
+        getSlas,
+        createSla,
     };
 };
 

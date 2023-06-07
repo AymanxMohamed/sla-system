@@ -18,9 +18,23 @@ const requestSlice = createSlice({
         addRequest(state, action: PayloadAction<Request>) {
             state.ClientRequests.push(action.payload);
         },
+        updateRequest(state, action: PayloadAction<Request>) {
+            let clientRequest =
+                state.ClientRequests.find(req => req.id === action.payload.id) as Request;
+            if (clientRequest)
+                clientRequest = action.payload;
+            let userRequest =
+                state.UserRequests.find(req => req.id === action.payload.id) as Request;
+            if (userRequest)
+                userRequest = action.payload;
+        }
     },
 });
 
-export const { setClientRequests, setUserRequests, addRequest  } = requestSlice.actions;
+export const {
+    setClientRequests,
+    setUserRequests,
+    addRequest,
+    updateRequest  } = requestSlice.actions;
 export default requestSlice.reducer;
 

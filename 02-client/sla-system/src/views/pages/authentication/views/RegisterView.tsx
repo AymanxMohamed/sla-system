@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import Input from "../components/Input";
-import Line from "../components/Line";
 import Button from "../../../common/sharedComponents/UI/Button";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthApi from "../../../../services/hooks/useAuthApi";
