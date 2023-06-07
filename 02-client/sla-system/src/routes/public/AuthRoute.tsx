@@ -5,6 +5,7 @@ import RegisterView from "../../views/pages/authentication/views/RegisterView";
 import AuthLayout from "../../views/pages/authentication/AuthLayout";
 
 export default function AuthRoute() {
+    console.log("inside auth")
     const location = useLocation();
     return useRoutes([
         {

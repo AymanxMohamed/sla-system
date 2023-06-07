@@ -4,6 +4,9 @@ import MainLayout from "../views/common/layouts/MainLayout";
 import RequireAuth from "./guards/RequireAuth";
 import RequireAdmin from "./guards/RequireAdmin";
 import RequireUser from "./guards/RequireUser";
+import AuthRoute from "./public/AuthRoute";
+import LoginView from "../views/pages/authentication/views/LoginView";
+import HomePage from "../views/pages/home";
 
 
 const AppRoutes: React.FC = (): JSX.Element => {
@@ -12,7 +15,8 @@ const AppRoutes: React.FC = (): JSX.Element => {
         <Routes>
             <Route element={<MainLayout />}>
                 {/* Public Routes */}
-
+                <Route path="/" element={<HomePage />} />
+                <Route path="auth/*" element={<AuthRoute />} />
                 {/* Protected Routes */}
                 <Route element={<RequireAuth />}>
 
@@ -28,6 +32,7 @@ const AppRoutes: React.FC = (): JSX.Element => {
                 </Route>
 
             </Route>
+            <Route path="/auth/login" element={<LoginView /> }/>
             <Route path="404" element={<PageNotFoundView /> }/>
             <Route
                 path="*"

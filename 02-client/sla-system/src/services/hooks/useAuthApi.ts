@@ -14,7 +14,7 @@ const useAuthApi = () => {
     const register = async (registerRequest: RegisterRequest): Promise<Result<User>> => {
 
         try {
-            const response = await axiosClient.post("/Register", registerRequest);
+            const response = await axiosClient.post("/Auth/Register", registerRequest);
             return response.data as Result<User>;
         } catch (err: any) {
             if (err.message === "Network Error") {
@@ -26,13 +26,13 @@ const useAuthApi = () => {
 
     const login = async (loginRequest: LoginRequest, checked: any) => {
         try {
-            const response = await axiosClient.post("users/login", loginRequest);
+            const response = await axiosClient.post("Auth/Login", loginRequest);
             if (checked.length) {
-                localStorage.setItem("userData", JSON.stringify(response.data.user));
+                localStorage.setItem("userData", JSON.stringify(response.data.value));
             } else {
-                sessionStorage.setItem("userData", JSON.stringify(response.data.user));
+                sessionStorage.setItem("userData", JSON.stringify(response.data.value));
             }
-            dispatch(setUser(response.data.user));
+            dispatch(setUser(response.data.value));
         } catch (err: any) {
             if (err.message === "Network Error") {
                 throw new Error("Server is Offline Now");

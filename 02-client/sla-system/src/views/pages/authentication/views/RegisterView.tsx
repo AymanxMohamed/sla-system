@@ -102,18 +102,6 @@ const RegisterView: React.FC = (): JSX.Element => {
                                     </a>
                                     .
                                 </div>
-                                <Line label="Or" />
-                                <Button
-                                    text={"Continue with GitHub"}
-                                    icon={"fa-brands fa-github"}
-                                    color={"gray"}
-                                />
-                                <br />
-                                <Button
-                                    text={"Continue with Google"}
-                                    icon={"fa-brands fa-google"}
-                                    color={"red"}
-                                />
                                 <div className="text-gray-600 text-center mt-6">
                                     Already a Member?
                                     <Link
